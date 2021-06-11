@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import Header from '../../elements-page/header/header';
+import {AppRoute} from '../../../const';
 
 function NotFound() {
   return (
@@ -9,7 +10,7 @@ function NotFound() {
 
       <section className="game__screen">
         <h1>404. Page not found</h1>
-        <Link to="/">Go to main page</Link>
+        <Link to={AppRoute.ROOT}>Go to main page</Link>
       </section>
     </section>
   );
