@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import OfferCard from '../../elements-page/offer-card/offer-card';
+import PlaceCard from '../../elements-page/place-card/place-card';
 import Header from '../../elements-page/header/header';
 
 const offers = [
@@ -120,7 +120,7 @@ function Main({offersCount}) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => <OfferCard key={offer.id} offer={offer}/>)}
+                {offers.map((offer) => <PlaceCard key={offer.id} offer={offer}/>)}
               </div>
             </section>
             <div className="cities__right-section">

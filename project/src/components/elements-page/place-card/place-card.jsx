@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {selectedRating} from '../../../const';
 
-function OfferCard({offer}) {
+function PlaceCard({offer}) {
   const {
     img,
     isPremium,
@@ -66,7 +66,7 @@ function OfferCard({offer}) {
   );
 }
 
-OfferCard.propTypes = {
+PlaceCard.propTypes = {
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
@@ -79,4 +79,4 @@ OfferCard.propTypes = {
   }).isRequired,
 };
 
-export default OfferCard;
+export default PlaceCard;
