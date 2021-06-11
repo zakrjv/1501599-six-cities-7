@@ -1,10 +1,10 @@
 import React from 'react';
-import MainPage from '../main-page/main-page';
+import Main from '../pages/main/main';
 import PropTypes from 'prop-types';
 
 function App({offersCount}) {
   return (
-    <MainPage offersCount={offersCount} />
+    <Main offersCount={offersCount} />
   );
 }
 

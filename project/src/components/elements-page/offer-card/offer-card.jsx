@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-const selectedRating = {
-  4: '80%',
-  5: '100%',
-};
+import {selectedRating} from '../../../const';
 
 function OfferCard({offer}) {
   const {
