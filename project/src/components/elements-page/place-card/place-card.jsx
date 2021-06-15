@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import placeCardProp from './place-card.prop';
 import {selectedRating} from '../../../const';
 
 function PlaceCard({offer}) {
   const {
-    img,
+    previewImage,
     isPremium,
     price,
     title,
@@ -38,7 +38,7 @@ function PlaceCard({offer}) {
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img
-            className="place-card__image" src={img} width="260" height="200"
+            className="place-card__image" src={previewImage} width="260" height="200"
             alt="Place image"
           />
         </a>
@@ -67,16 +67,7 @@ function PlaceCard({offer}) {
 }
 
 PlaceCard.propTypes = {
-  offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    isFavorites: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-  }).isRequired,
+  offer: placeCardProp,
 };
 
 export default PlaceCard;
