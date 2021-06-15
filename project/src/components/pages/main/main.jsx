@@ -2,59 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../../elements-page/place-card/place-card';
 import Header from '../../elements-page/header/header';
-
-const offers = [
-  {
-    id: 1,
-    img: 'img/apartment-01.jpg',
-    isPremium: true,
-    price: 120,
-    title: 'Beautiful &amp; luxurious apartment at great location',
-    type: 'Apartment',
-    isFavorites: false,
-    rating: 4,
-  },
-  {
-    id: 2,
-    img: 'img/room.jpg',
-    isPremium: false,
-    price: 80,
-    title: 'Wood and stone place',
-    type: 'Private room',
-    isFavorites: true,
-    rating: 4,
-  },
-  {
-    id: 3,
-    img: 'img/apartment-02.jpg',
-    isPremium: false,
-    price: 132,
-    title: 'Canal View Prinsengracht',
-    type: 'Apartment',
-    isFavorites: false,
-    rating: 4,
-  },
-  {
-    id: 4,
-    img: 'img/apartment-03.jpg',
-    isPremium: true,
-    price: 180,
-    title: 'Nice, cozy, warm big bed apartment',
-    type: 'Apartment',
-    isFavorites: false,
-    rating: 5,
-  },
-  {
-    id: 5,
-    img: 'img/room.jpg',
-    isPremium: false,
-    price: 80,
-    title: 'Wood and stone place',
-    type: 'Private room',
-    isFavorites: true,
-    rating: 4,
-  },
-];
+import {offers} from '../../../mocks/offers';
 
 function Main({offersCount}) {
   return (
