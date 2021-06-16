@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlaceCard from '../../elements-page/place-card/place-card';
 import Header from '../../elements-page/header/header';
-import {offers} from '../../../mocks/offers';
+import placeCardProp from '../../elements-page/place-card/place-card.prop';
+import CardList from '../../elements-page/card-list/card-list';
 
-function Main({offersCount}) {
+function Main({offersCount, offers}) {
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -67,9 +67,7 @@ function Main({offersCount}) {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => <PlaceCard key={offer.id} offer={offer}/>)}
-              </div>
+              <CardList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"/>
@@ -83,6 +81,7 @@ function Main({offersCount}) {
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
+  offers: placeCardProp,
 };
 
 export default Main;
