@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import placeCardProp from './place-card.prop';
 import {selectedRating} from '../../../const';
 
-function PlaceCard({offer}) {
+function PlaceCard({offer, onCardMouseOver}) {
   const {
     previewImage,
     isPremium,
@@ -33,7 +34,7 @@ function PlaceCard({offer}) {
   }
 
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card" onMouseOver={onCardMouseOver}>
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
@@ -68,6 +69,7 @@ function PlaceCard({offer}) {
 
 PlaceCard.propTypes = {
   offer: placeCardProp,
+  onCardMouseOver: PropTypes.func.isRequired,
 };
 
 export default PlaceCard;
