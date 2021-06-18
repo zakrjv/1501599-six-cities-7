@@ -20,7 +20,7 @@ export const offers = [
     },
     images: ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
     isPremium: true,
-    isFavorites: false,
+    isFavorites: true,
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
@@ -31,7 +31,7 @@ export const offers = [
     price: 120,
     rating: 5,
     title: 'Beautiful & luxurious studio at great location',
-    type: 'apartment',
+    type: 'Apartment',
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ export const offers = [
         longitude: 4.895168,
         zoom: 10,
       },
-      name: 'Amsterdam',
+      name: 'Cologne',
     },
     description: 'An independent House, strategically located between Rembrand Square and National Opera.',
     goods: ['Heating', 'Dishwasher'],
@@ -54,7 +54,7 @@ export const offers = [
     },
     images: ['img/apartment-03.jpg', 'img/room.jpg', 'img/room.jpg'],
     isPremium: true,
-    isFavorites: false,
+    isFavorites: true,
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
@@ -65,7 +65,7 @@ export const offers = [
     price: 80,
     rating: 4,
     title: 'Wood and stone place',
-    type: 'apartment',
+    type: 'Apartment',
   },
   {
     id: 3,
@@ -122,7 +122,7 @@ export const offers = [
     },
     images: ['img/apartment-03.jpg', 'img/apartment-03.jpg', 'img/apartment-03.jpg', 'img/apartment-03.jpg'],
     isPremium: true,
-    isFavorites: false,
+    isFavorites: true,
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,

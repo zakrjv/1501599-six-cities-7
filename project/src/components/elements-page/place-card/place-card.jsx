@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import placeCardProp from './place-card.prop';
-import {selectedRating} from '../../../const';
+import {selectedRating, onPage} from '../../../const';
 
-function PlaceCard({offer, onCardMouseOver}) {
+function PlaceCard({offer, onCardMouseEnter, onCardMouseOut, currentPage}) {
   const {
     previewImage,
     isPremium,
@@ -34,9 +35,22 @@ function PlaceCard({offer, onCardMouseOver}) {
   }
 
   return (
-    <article className="cities__place-card place-card" onMouseOver={onCardMouseOver}>
+    <article
+      className={clsx('place-card', {
+        'favorites__card': currentPage === onPage.FAVORITES,
+        'near-places__card': currentPage === onPage.OFFER,
+        'cities__place-card': currentPage === onPage.MAIN,
+      })}
+      onMouseEnter={onCardMouseEnter}
+      onMouseOut={onCardMouseOut}
+    >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={clsx('place-card__image-wrapper', {
+        'favorites__image-wrapper': currentPage === onPage.FAVORITES,
+        'near-places__image-wrapper': currentPage === onPage.OFFER,
+        'cities__image-wrapper': currentPage === onPage.MAIN,
+      })}
+      >
         <a href="#">
           <img
             className="place-card__image" src={previewImage} width="260" height="200"
@@ -44,7 +58,10 @@ function PlaceCard({offer, onCardMouseOver}) {
           />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={clsx('place-card__info', {
+        'favorites__card-info': currentPage === onPage.FAVORITES,
+      })}
+      >
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -69,7 +86,9 @@ function PlaceCard({offer, onCardMouseOver}) {
 
 PlaceCard.propTypes = {
   offer: placeCardProp,
-  onCardMouseOver: PropTypes.func.isRequired,
+  onCardMouseEnter: PropTypes.func.isRequired,
+  onCardMouseOut: PropTypes.func.isRequired,
+  currentPage: PropTypes.string.isRequired,
 };
 
 export default PlaceCard;

@@ -17,7 +17,7 @@ function App({offersCount, offers}) {
           <Main offersCount={offersCount} offers={offers}/>
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <Favorites/>
+          <Favorites offers={offers}/>
         </Route>
         <Route exact path={AppRoute.OFFER}>
           <Offer/>

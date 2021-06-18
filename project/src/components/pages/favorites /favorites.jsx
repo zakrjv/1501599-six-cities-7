@@ -5,6 +5,14 @@ import {selectedRating} from '../../../const';
 import {AppRoute} from '../../../const';
 
 function Favorites() {
+  // const favoritesList = [];
+  //
+  // offers.forEach((offer) => {
+  //   if (offer.isFavorites) {
+  //     favoritesList.push(offer);
+  //   }
+  // })
+
   return (
     <div className="page">
       <Header/>
@@ -23,6 +31,7 @@ function Favorites() {
                   </div>
                 </div>
                 <div className="favorites__places">
+
                   <article className="favorites__card place-card">
                     <div className="favorites__image-wrapper place-card__image-wrapper">
                       <a href="#">
@@ -98,6 +107,7 @@ function Favorites() {
                       <p className="place-card__type">Private room</p>
                     </div>
                   </article>
+
                 </div>
               </li>
 
@@ -110,7 +120,8 @@ function Favorites() {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <article className="favorites__card place-card">
+                  {/*{offers.map((offer) => <PlaceCard onFavoritesPage={true} offer={offer} key={offer.id}/>)}*/}
+                  {/*<article className="favorites__card place-card">
                     <div className="favorites__image-wrapper place-card__image-wrapper">
                       <a href="#">
                         <img
@@ -146,7 +157,7 @@ function Favorites() {
                       </h2>
                       <p className="place-card__type">Apartment</p>
                     </div>
-                  </article>
+                  </article>*/}
                 </div>
               </li>
             </ul>
