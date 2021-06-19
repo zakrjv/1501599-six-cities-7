@@ -7,14 +7,12 @@ import placeCardProp from '../../elements-page/place-card/place-card.prop';
 
 function Favorites({offers}) {
   const favoriteOffersGroupedByCityName = offers
-    .filter((offer) => {
-      return offer.isFavorites === true;
-    })
+    .filter((offer) => offer.isFavorites === true)
     .reduce((allOffers, offer) => {
       const cityName = offer.city.name;
       allOffers[cityName] = [...(allOffers[cityName] || []), offer];
       return allOffers;
-    }, {})
+    }, {});
 
   return (
     <div className="page">
@@ -26,21 +24,19 @@ function Favorites({offers}) {
             <h1 className="favorites__title">Saved listing</h1>
 
             <ul className="favorites__list">
-              {Object.keys(favoriteOffersGroupedByCityName).map((cityName) => {
-                return (
-                  <li className="favorites__locations-items" key={cityName}>
-                    <div className="favorites__locations locations locations--current">
-                      <div className="locations__item">
-                        <a className="locations__item-link" href="#">
-                          <span>{cityName}</span>
-                        </a>
-                      </div>
+              {Object.keys(favoriteOffersGroupedByCityName).map((cityName) => (
+                <li className="favorites__locations-items" key={cityName}>
+                  <div className="favorites__locations locations locations--current">
+                    <div className="locations__item">
+                      <a className="locations__item-link" href="#">
+                        <span>{cityName}</span>
+                      </a>
                     </div>
+                  </div>
 
-                    <CardList offers={favoriteOffersGroupedByCityName[cityName]} currentPage='favorites'/>
-                  </li>
-                )
-              })}
+                  <CardList offers={favoriteOffersGroupedByCityName[cityName]} currentPage='favorites'/>
+                </li>
+              ))}
             </ul>
           </section>
         </div>

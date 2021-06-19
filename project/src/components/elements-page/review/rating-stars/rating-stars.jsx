@@ -11,7 +11,7 @@ const textRating = {
   3: 'not bad',
   4: 'good',
   5: 'perfect',
-}
+};
 
 // Не изменяется checked при выборе рейтинга, но если
 // первоначально стейт задать, допустим, 3 вместо 0, то применяется именно к заданному.
@@ -19,8 +19,8 @@ const textRating = {
 function RatingStars({onChange, rating}) {
   return (
     <div className="reviews__rating-form form__rating">
-      {RATING_STARS.map((star) => {
-        return <React.Fragment key={star + 'star'}>
+      {RATING_STARS.map((star) => (
+        <React.Fragment key={star}>
           <input
             className="form__rating-input visually-hidden"
             name="rating"
@@ -40,9 +40,9 @@ function RatingStars({onChange, rating}) {
             </svg>
           </label>
         </React.Fragment>
-      })}
+      ))}
     </div>
-  )
+  );
 }
 
 RatingStars.propTypes = {
