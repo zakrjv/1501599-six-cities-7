@@ -53,7 +53,15 @@ function PlaceCard({offer, onCardMouseEnter, onCardMouseOut, currentPage}) {
       >
         <a href="#">
           <img
-            className="place-card__image" src={previewImage} width="260" height="200"
+            className="place-card__image" src={previewImage}
+            width={clsx({
+              '150': currentPage === onPage.FAVORITES,
+              '260': currentPage === onPage.MAIN || currentPage === onPage.OFFER,
+            })}
+            height={clsx({
+              '110': currentPage === onPage.FAVORITES,
+              '200': currentPage === onPage.MAIN || currentPage === onPage.OFFER,
+            })}
             alt="Place image"
           />
         </a>
