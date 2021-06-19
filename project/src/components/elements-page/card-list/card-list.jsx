@@ -13,8 +13,7 @@ function CardList({offers, currentPage}) {
       'favorites__places': currentPage === onPage.FAVORITES,
       'near-places__list places__list': currentPage === onPage.OFFER,
       'cities__places-list places__list tabs__content': currentPage === onPage.MAIN,
-    })}
-    >
+    })}>
       {offers.map((offer) => (
         <PlaceCard offer={offer} onCardMouseEnter={() => {
           setCardActive({...cardActive, ...offer});

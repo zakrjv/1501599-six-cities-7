@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import clsx from 'clsx';
 import placeCardProp from './place-card.prop';
-import {selectedRating, onPage} from '../../../const';
+import {selectedRating, onPage, AppRoute} from '../../../const';
 
 function PlaceCard({offer, onCardMouseEnter, onCardMouseOut, currentPage}) {
   const {
@@ -51,7 +52,7 @@ function PlaceCard({offer, onCardMouseEnter, onCardMouseOut, currentPage}) {
         'cities__image-wrapper': currentPage === onPage.MAIN,
       })}
       >
-        <a href="#">
+        <Link to={AppRoute.OFFER}>
           <img
             className="place-card__image" src={previewImage}
             width={clsx({
@@ -64,7 +65,7 @@ function PlaceCard({offer, onCardMouseEnter, onCardMouseOut, currentPage}) {
             })}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className={clsx('place-card__info', {
         'favorites__card-info': currentPage === onPage.FAVORITES,
@@ -84,7 +85,7 @@ function PlaceCard({offer, onCardMouseEnter, onCardMouseOut, currentPage}) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={AppRoute.OFFER}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

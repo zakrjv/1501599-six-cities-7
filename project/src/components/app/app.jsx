@@ -14,19 +14,19 @@ function App({offersCount, offers}) {
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <Main offersCount={offersCount} offers={offers}/>
+          <Main offersCount={offersCount} offers={offers} />
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <Favorites offers={offers}/>
+          <Favorites offers={offers} />
         </Route>
         <Route exact path={AppRoute.OFFER}>
-          <Offer/>
+          <Offer />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
-          <SignIn/>
+          <SignIn />
         </Route>
         <Route>
-          <NotFound/>
+          <NotFound />
         </Route>
       </Switch>
     </BrowserRouter>
