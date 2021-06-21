@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {selectedRating} from '../../../const';
+import {Link} from 'react-router-dom';
+import clsx from 'clsx';
+import placeCardProp from './place-card.prop';
+import {selectedRating, onPage, AppRoute} from '../../../const';
 
-function PlaceCard({offer}) {
+function PlaceCard({offer, onCardMouseEnter, onCardMouseOut, currentPage}) {
   const {
-    img,
+    previewImage,
     isPremium,
     price,
     title,
@@ -33,17 +36,41 @@ function PlaceCard({offer}) {
   }
 
   return (
-    <article className="cities__place-card place-card">
+    <article
+      className={clsx('place-card', {
+        'favorites__card': currentPage === onPage.FAVORITES,
+        'near-places__card': currentPage === onPage.OFFER,
+        'cities__place-card': currentPage === onPage.MAIN,
+      })}
+      onMouseEnter={onCardMouseEnter}
+      onMouseOut={onCardMouseOut}
+    >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+      <div className={clsx('place-card__image-wrapper', {
+        'favorites__image-wrapper': currentPage === onPage.FAVORITES,
+        'near-places__image-wrapper': currentPage === onPage.OFFER,
+        'cities__image-wrapper': currentPage === onPage.MAIN,
+      })}
+      >
+        <Link to={AppRoute.OFFER}>
           <img
-            className="place-card__image" src={img} width="260" height="200"
+            className="place-card__image" src={previewImage}
+            width={clsx({
+              '150': currentPage === onPage.FAVORITES,
+              '260': currentPage === onPage.MAIN || currentPage === onPage.OFFER,
+            })}
+            height={clsx({
+              '110': currentPage === onPage.FAVORITES,
+              '200': currentPage === onPage.MAIN || currentPage === onPage.OFFER,
+            })}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
-      <div className="place-card__info">
+      <div className={clsx('place-card__info', {
+        'favorites__card-info': currentPage === onPage.FAVORITES,
+      })}
+      >
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -58,7 +85,7 @@ function PlaceCard({offer}) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={AppRoute.OFFER}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -67,16 +94,10 @@ function PlaceCard({offer}) {
 }
 
 PlaceCard.propTypes = {
-  offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    isFavorites: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-  }).isRequired,
+  offer: placeCardProp,
+  onCardMouseEnter: PropTypes.func.isRequired,
+  onCardMouseOut: PropTypes.func.isRequired,
+  currentPage: PropTypes.string.isRequired,
 };
 
 export default PlaceCard;

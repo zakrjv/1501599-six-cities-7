@@ -1,62 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlaceCard from '../../elements-page/place-card/place-card';
 import Header from '../../elements-page/header/header';
+import placeCardProp from '../../elements-page/place-card/place-card.prop';
+import CardList from '../../elements-page/card-list/card-list';
 
-const offers = [
-  {
-    id: 1,
-    img: 'img/apartment-01.jpg',
-    isPremium: true,
-    price: 120,
-    title: 'Beautiful &amp; luxurious apartment at great location',
-    type: 'Apartment',
-    isFavorites: false,
-    rating: 4,
-  },
-  {
-    id: 2,
-    img: 'img/room.jpg',
-    isPremium: false,
-    price: 80,
-    title: 'Wood and stone place',
-    type: 'Private room',
-    isFavorites: true,
-    rating: 4,
-  },
-  {
-    id: 3,
-    img: 'img/apartment-02.jpg',
-    isPremium: false,
-    price: 132,
-    title: 'Canal View Prinsengracht',
-    type: 'Apartment',
-    isFavorites: false,
-    rating: 4,
-  },
-  {
-    id: 4,
-    img: 'img/apartment-03.jpg',
-    isPremium: true,
-    price: 180,
-    title: 'Nice, cozy, warm big bed apartment',
-    type: 'Apartment',
-    isFavorites: false,
-    rating: 5,
-  },
-  {
-    id: 5,
-    img: 'img/room.jpg',
-    isPremium: false,
-    price: 80,
-    title: 'Wood and stone place',
-    type: 'Private room',
-    isFavorites: true,
-    rating: 4,
-  },
-];
-
-function Main({offersCount}) {
+function Main({offersCount, offers}) {
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -119,9 +67,7 @@ function Main({offersCount}) {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => <PlaceCard key={offer.id} offer={offer}/>)}
-              </div>
+              <CardList offers={offers} currentPage='main' />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"/>
@@ -135,6 +81,7 @@ function Main({offersCount}) {
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
+  offers: placeCardProp,
 };
 
 export default Main;
