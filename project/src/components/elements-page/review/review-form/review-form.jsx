@@ -5,10 +5,6 @@ function ReviewForm() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
-  const handleRatingChange = (evt) => {
-    setRating(+evt.target.value);
-  };
-
   const handleCommentChange = (evt) => {
     setComment(evt.target.value);
   };
@@ -16,7 +12,7 @@ function ReviewForm() {
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <RatingStars onChange={handleRatingChange} rating={rating}/>
+      <RatingStars onChange={setRating} rating={rating}/>
       <textarea
         className="reviews__textarea form__textarea"
         id="review"

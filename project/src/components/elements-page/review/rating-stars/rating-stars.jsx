@@ -27,7 +27,7 @@ function RatingStars({onChange, rating}) {
             value={star}
             id={`${star}-stars`}
             type="radio"
-            onChange={onChange}
+            onChange={() => onChange(star)}
             checked={star === rating}
           />
           <label

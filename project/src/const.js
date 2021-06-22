@@ -10,7 +10,7 @@ const AppRoute = {
   OFFER: '/offer/:id',
 };
 
-const onPage = {
+const Page = {
   FAVORITES: 'favorites',
   OFFER: 'offer',
   MAIN: 'main',
@@ -19,5 +19,5 @@ const onPage = {
 export {
   selectedRating,
   AppRoute,
-  onPage
+  Page
 };

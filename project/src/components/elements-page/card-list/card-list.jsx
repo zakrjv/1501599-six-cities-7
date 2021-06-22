@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import PlaceCard from '../place-card/place-card';
 import placeCardProp from '../place-card/place-card.prop';
-import {onPage} from '../../../const';
+import {Page} from '../../../const';
 
 function CardList({offers, currentPage}) {
   const [cardActive, setCardActive] = useState({});
 
   return (
     <div className={clsx({
-      'favorites__places': currentPage === onPage.FAVORITES,
-      'near-places__list places__list': currentPage === onPage.OFFER,
-      'cities__places-list places__list tabs__content': currentPage === onPage.MAIN,
+      'favorites__places': currentPage === Page.FAVORITES,
+      'near-places__list places__list': currentPage === Page.OFFER,
+      'cities__places-list places__list tabs__content': currentPage === Page.MAIN,
     })}
     >
       {offers.map((offer) => (

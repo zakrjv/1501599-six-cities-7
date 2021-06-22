@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import clsx from 'clsx';
 import placeCardProp from './place-card.prop';
-import {selectedRating, onPage, AppRoute} from '../../../const';
+import {selectedRating, Page, AppRoute} from '../../../const';
 
 function PlaceCard({offer, onCardMouseEnter, onCardMouseOut, currentPage}) {
   const {
@@ -38,37 +38,37 @@ function PlaceCard({offer, onCardMouseEnter, onCardMouseOut, currentPage}) {
   return (
     <article
       className={clsx('place-card', {
-        'favorites__card': currentPage === onPage.FAVORITES,
-        'near-places__card': currentPage === onPage.OFFER,
-        'cities__place-card': currentPage === onPage.MAIN,
+        'favorites__card': currentPage === Page.FAVORITES,
+        'near-places__card': currentPage === Page.OFFER,
+        'cities__place-card': currentPage === Page.MAIN,
       })}
       onMouseEnter={onCardMouseEnter}
       onMouseOut={onCardMouseOut}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={clsx('place-card__image-wrapper', {
-        'favorites__image-wrapper': currentPage === onPage.FAVORITES,
-        'near-places__image-wrapper': currentPage === onPage.OFFER,
-        'cities__image-wrapper': currentPage === onPage.MAIN,
+        'favorites__image-wrapper': currentPage === Page.FAVORITES,
+        'near-places__image-wrapper': currentPage === Page.OFFER,
+        'cities__image-wrapper': currentPage === Page.MAIN,
       })}
       >
         <Link to={AppRoute.OFFER}>
           <img
             className="place-card__image" src={previewImage}
             width={clsx({
-              '150': currentPage === onPage.FAVORITES,
-              '260': currentPage === onPage.MAIN || currentPage === onPage.OFFER,
+              '150': currentPage === Page.FAVORITES,
+              '260': currentPage === Page.MAIN || currentPage === Page.OFFER,
             })}
             height={clsx({
-              '110': currentPage === onPage.FAVORITES,
-              '200': currentPage === onPage.MAIN || currentPage === onPage.OFFER,
+              '110': currentPage === Page.FAVORITES,
+              '200': currentPage === Page.MAIN || currentPage === Page.OFFER,
             })}
             alt="Place image"
           />
         </Link>
       </div>
       <div className={clsx('place-card__info', {
-        'favorites__card-info': currentPage === onPage.FAVORITES,
+        'favorites__card-info': currentPage === Page.FAVORITES,
       })}
       >
         <div className="place-card__price-wrapper">
