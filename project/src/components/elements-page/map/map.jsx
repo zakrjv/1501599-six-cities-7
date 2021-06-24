@@ -4,31 +4,38 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from './useMap';
 import placeCardProp from '../place-card/place-card.prop';
+import {MapMarker} from '../../../const';
 
-function Map({offers, city}) {
+const defaultCustomIcon = leaflet.icon({
+  iconUrl: MapMarker.URL_MARKER_DEFAULT,
+  iconSize: [30, 30],
+  iconAnchor: [15, 30],
+});
+
+const activeCustomIcon = leaflet.icon({
+  iconUrl: MapMarker.URL_MARKER_ACTIVE,
+  iconSize: [30, 30],
+  iconAnchor: [15, 30],
+});
+
+function Map({offers, city, activeOfferId}) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
-  const icon = leaflet.icon({
-    iconUrl: 'img/pin.svg',
-    iconSize: [30, 30],
-    iconAnchor: [15, 30],
-  });
-
   useEffect(() => {
     if (map) {
-      offers.forEach((offer) => {
+      offers.forEach(({id, location}) => {
         leaflet
           .marker({
-            lat: offer.location.latitude,
-            lng: offer.location.longitude,
+            lat: location.latitude,
+            lng: location.longitude,
           }, {
-            icon,
+            icon: id === activeOfferId ? activeCustomIcon : defaultCustomIcon,
           })
           .addTo(map);
       });
     }
-  }, [map, offers, icon]);
+  }, [map, offers, activeOfferId]);
 
 
   return (
@@ -42,6 +49,7 @@ function Map({offers, city}) {
 
 Map.propTypes = {
   offers: placeCardProp,
+  activeOfferId: PropTypes.number,
   city: PropTypes.shape({
     title: PropTypes.string.isRequired,
     lat: PropTypes.number.isRequired,

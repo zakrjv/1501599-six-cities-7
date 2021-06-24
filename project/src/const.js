@@ -16,8 +16,14 @@ const Page = {
   MAIN: 'main',
 };
 
+const MapMarker = {
+  URL_MARKER_DEFAULT: 'img/pin.svg',
+  URL_MARKER_ACTIVE: 'img/pin-active.svg',
+};
+
 export {
   selectedRating,
   AppRoute,
-  Page
+  Page,
+  MapMarker
 };

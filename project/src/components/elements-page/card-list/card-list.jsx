@@ -1,13 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import PlaceCard from '../place-card/place-card';
 import placeCardProp from '../place-card/place-card.prop';
 import {Page} from '../../../const';
 
-function CardList({offers, currentPage}) {
-  const [cardActive, setCardActive] = useState({});
-
+function CardList({offers, currentPage, hoverOnCard}) {
   return (
     <div className={clsx({
       'favorites__places': currentPage === Page.FAVORITES,
@@ -16,11 +14,10 @@ function CardList({offers, currentPage}) {
     })}
     >
       {offers.map((offer) => (
-        <PlaceCard offer={offer} onCardMouseEnter={() => {
-          setCardActive({...cardActive, ...offer});
-        }} onCardMouseOut={() => {
-          setCardActive({});
-        }} currentPage={currentPage} key={offer.id}
+        <PlaceCard
+          offer={offer}
+          onCardMouseEnter={() => hoverOnCard(offer.id)}
+          currentPage={currentPage} key={offer.id}
         />
       ))}
     </div>
@@ -32,6 +29,7 @@ CardList.propTypes = {
     placeCardProp,
   ).isRequired,
   currentPage: PropTypes.string.isRequired,
+  hoverOnCard: PropTypes.func.isRequired,
 };
 
 
