@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import clsx from 'clsx';
-import placeCardProp from './place-card.prop';
+import placeCardProp from '../../../props/place-card.prop';
 import {selectedRating, Page, AppRoute} from '../../../const';
 
 function PlaceCard({offer, onCardMouseEnter, currentPage}) {

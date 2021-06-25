@@ -7,9 +7,10 @@ import NotFound from '../pages/not-found /not-found';
 import Offer from '../pages/offer/offer';
 import SignIn from '../pages/sign-in/sign-in';
 import {AppRoute} from '../../const';
-import placeCardProp from '../elements-page/place-card/place-card.prop';
+import placeCardProp from '../../props/place-card.prop';
+import reviewProp from '../../props/review.prop';
 
-function App({offersCount, offers, city}) {
+function App({offersCount, offers, city, reviews}) {
   return (
     <BrowserRouter>
       <Switch>
@@ -24,7 +25,7 @@ function App({offersCount, offers, city}) {
           <Favorites offers={offers} />
         </Route>
         <Route exact path={AppRoute.OFFER}>
-          <Offer />
+          <Offer reviews={reviews} />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <SignIn />
@@ -46,6 +47,7 @@ App.propTypes = {
     lng: PropTypes.number.isRequired,
     zoom: PropTypes.number.isRequired,
   }).isRequired,
+  reviews: reviewProp,
 };
 
 export default App;

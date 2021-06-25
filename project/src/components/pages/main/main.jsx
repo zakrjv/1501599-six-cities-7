@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../elements-page/header/header';
-import placeCardProp from '../../elements-page/place-card/place-card.prop';
+import placeCardProp from '../../../props/place-card.prop';
 import CardList from '../../elements-page/card-list/card-list';
 import Map from '../../elements-page/map/map';
 
