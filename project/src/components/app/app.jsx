@@ -9,12 +9,16 @@ import SignIn from '../pages/sign-in/sign-in';
 import {AppRoute} from '../../const';
 import placeCardProp from '../elements-page/place-card/place-card.prop';
 
-function App({offersCount, offers}) {
+function App({offersCount, offers, city}) {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <Main offersCount={offersCount} offers={offers} />
+          <Main
+            offersCount={offersCount}
+            offers={offers}
+            city={city}
+          />
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
           <Favorites offers={offers} />
@@ -36,6 +40,12 @@ function App({offersCount, offers}) {
 App.propTypes = {
   offersCount: PropTypes.number.isRequired,
   offers: placeCardProp,
+  city: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default App;

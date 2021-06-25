@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../elements-page/header/header';
 import placeCardProp from '../../elements-page/place-card/place-card.prop';
 import CardList from '../../elements-page/card-list/card-list';
+import Map from '../../elements-page/map/map';
 
-function Main({offersCount, offers}) {
+function Main({offersCount, offers, city}) {
+  const [activeOfferId , setActiveOfferId] = useState(0);
+
   return (
     <div className="page page--gray page--main">
-      <Header />
+      <Header/>
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -67,10 +70,21 @@ function Main({offersCount, offers}) {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <CardList offers={offers} currentPage='main' />
+              <CardList
+                offers={offers}
+                currentPage='main'
+                hoverOnCard={(offerId) => setActiveOfferId(offerId)}
+              />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"/>
+              <section className="cities__map map">
+
+                <Map
+                  offers={offers}
+                  city={city}
+                  activeOfferId={activeOfferId}
+                />
+              </section>
             </div>
           </div>
         </div>
@@ -82,6 +96,12 @@ function Main({offersCount, offers}) {
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
   offers: placeCardProp,
+  city: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Main;
