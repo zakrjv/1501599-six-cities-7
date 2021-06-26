@@ -25,7 +25,11 @@ function App({offersCount, offers, city, reviews}) {
           <Favorites offers={offers} />
         </Route>
         <Route exact path={AppRoute.OFFER}>
-          <Offer reviews={reviews} />
+          <Offer
+            reviews={reviews}
+            offers={offers}
+            city={city}
+          />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <SignIn />

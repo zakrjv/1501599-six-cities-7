@@ -1,11 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from '../../elements-page/header/header';
 import {selectedRating} from '../../../const';
 import ReviewForm from '../../elements-page/review/review-form/review-form';
 import ReviewList from '../../elements-page/review/review-list/review-list';
+import Map from '../../elements-page/map/map';
 import reviewProp from '../../../props/review.prop';
+import placeCardProp from '../../../props/place-card.prop';
 
-function Offer({reviews}) {
+const OFFERS_COUNT = 3;
+
+function Offer({reviews, offers, city}) {
+  const neighboringOffers = offers.slice(0, OFFERS_COUNT);
+
   return (
     <div className="page">
       <Header/>
@@ -141,7 +148,13 @@ function Offer({reviews}) {
               </section>
             </div>
           </div>
-          <section className="property__map map"/>
+          <section className="property__map map">
+
+            <Map
+              offers={neighboringOffers}
+              city={city}
+            />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -261,6 +274,13 @@ function Offer({reviews}) {
 
 Offer.propTypes = {
   reviews: reviewProp,
+  offers: placeCardProp,
+  city: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Offer;
