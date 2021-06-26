@@ -7,6 +7,7 @@ import {selectedRating, Page, AppRoute} from '../../../const';
 
 function PlaceCard({offer, onCardMouseEnter, currentPage}) {
   const {
+    id,
     previewImage,
     isPremium,
     price,
@@ -51,7 +52,7 @@ function PlaceCard({offer, onCardMouseEnter, currentPage}) {
         'cities__image-wrapper': currentPage === Page.MAIN,
       })}
       >
-        <Link to={AppRoute.OFFER}>
+        <Link to={`${AppRoute.OFFER}/${id}`}>
           <img
             className="place-card__image" src={previewImage}
             width={clsx({
@@ -84,7 +85,7 @@ function PlaceCard({offer, onCardMouseEnter, currentPage}) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.OFFER}>{title}</Link>
+          <Link to={`${AppRoute.OFFER}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

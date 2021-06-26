@@ -22,20 +22,24 @@ function App({offersCount, offers, city, reviews}) {
           />
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <Favorites offers={offers} />
+          <Favorites offers={offers}/>
         </Route>
-        <Route exact path={AppRoute.OFFER}>
-          <Offer
-            reviews={reviews}
-            offers={offers}
-            city={city}
-          />
-        </Route>
+        {offers.map((offer) => (
+          <Route exact path={`${AppRoute.OFFER}/${offer.id}`} key={offer.id}>
+            <Offer
+              key={offer.id}
+              offer={offer}
+              offers={offers}
+              reviews={reviews}
+              city={city}
+            />
+          </Route>
+        ))}
         <Route exact path={AppRoute.LOGIN}>
-          <SignIn />
+          <SignIn/>
         </Route>
         <Route>
-          <NotFound />
+          <NotFound/>
         </Route>
       </Switch>
     </BrowserRouter>
