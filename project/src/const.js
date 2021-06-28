@@ -1,4 +1,7 @@
 const selectedRating = {
+  1: '20%',
+  2: '40%',
+  3: '60%',
   4: '80%',
   5: '100%',
 };
@@ -7,7 +10,7 @@ const AppRoute = {
   ROOT: '/',
   LOGIN: '/login',
   FAVORITES: '/favorites',
-  OFFER: '/offer/:id',
+  OFFER: '/offer',
 };
 
 const Page = {

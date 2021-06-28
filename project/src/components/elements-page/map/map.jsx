@@ -2,8 +2,8 @@ import React, {useRef, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import useMap from './useMap';
-import placeCardProp from '../place-card/place-card.prop';
+import useMap from '../../../hooks/useMap';
+import placeCardProp from '../../../props/place-card.prop';
 import {MapMarker} from '../../../const';
 
 const defaultCustomIcon = leaflet.icon({

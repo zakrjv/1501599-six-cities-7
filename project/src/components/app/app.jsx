@@ -7,9 +7,10 @@ import NotFound from '../pages/not-found /not-found';
 import Offer from '../pages/offer/offer';
 import SignIn from '../pages/sign-in/sign-in';
 import {AppRoute} from '../../const';
-import placeCardProp from '../elements-page/place-card/place-card.prop';
+import placeCardProp from '../../props/place-card.prop';
+import reviewProp from '../../props/review.prop';
 
-function App({offersCount, offers, city}) {
+function App({offersCount, offers, city, reviews}) {
   return (
     <BrowserRouter>
       <Switch>
@@ -21,16 +22,24 @@ function App({offersCount, offers, city}) {
           />
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <Favorites offers={offers} />
+          <Favorites offers={offers}/>
         </Route>
-        <Route exact path={AppRoute.OFFER}>
-          <Offer />
-        </Route>
+        {offers.map((offer) => (
+          <Route exact path={`${AppRoute.OFFER}/${offer.id}`} key={offer.id}>
+            <Offer
+              key={offer.id}
+              offer={offer}
+              offers={offers}
+              reviews={reviews}
+              city={city}
+            />
+          </Route>
+        ))}
         <Route exact path={AppRoute.LOGIN}>
-          <SignIn />
+          <SignIn/>
         </Route>
         <Route>
-          <NotFound />
+          <NotFound/>
         </Route>
       </Switch>
     </BrowserRouter>
@@ -46,6 +55,7 @@ App.propTypes = {
     lng: PropTypes.number.isRequired,
     zoom: PropTypes.number.isRequired,
   }).isRequired,
+  reviews: reviewProp,
 };
 
 export default App;
