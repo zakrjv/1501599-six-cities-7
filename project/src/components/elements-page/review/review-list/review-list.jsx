@@ -2,6 +2,7 @@ import React from 'react';
 import ReviewItem from '../review-item/review-item';
 import dayjs from 'dayjs';
 import reviewProp from '../../../../props/review.prop';
+import PropTypes from 'prop-types';
 
 const REVIEWS_MAX_COUNT = 10;
 
@@ -40,7 +41,7 @@ function ReviewList({reviews}) {
 }
 
 ReviewList.propTypes = {
-  reviews: reviewProp,
+  reviews: PropTypes.arrayOf(reviewProp),
 };
 
 export default ReviewList;

@@ -46,7 +46,7 @@ function Offer({reviews, offer, offers, city}) {
             <div className="property__gallery">
               {images.map((img) => (
                 <div key={img} className="property__image-wrapper">
-                  <img className="property__image" src={img} alt="Photo studio"/>
+                  <img className="property__image" src={img} alt="Studio"/>
                 </div>
               ))}
             </div>

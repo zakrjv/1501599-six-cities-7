@@ -63,7 +63,7 @@ function PlaceCard({offer, onCardMouseEnter, currentPage}) {
               '110': currentPage === Page.FAVORITES,
               '200': currentPage === Page.MAIN || currentPage === Page.OFFER,
             })}
-            alt="Place image"
+            alt="Place"
           />
         </Link>
       </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Header from '../../elements-page/header/header';
@@ -7,6 +7,8 @@ import CardList from '../../elements-page/card-list/card-list';
 import placeCardProp from '../../../props/place-card.prop';
 
 function Favorites({offers}) {
+  const [, setActiveOfferId] = useState(0);
+
   const favoriteOffersGroupedByCityName = offers
     .filter((offer) => offer.isFavorites === true)
     .reduce((allOffers, offer) => {
@@ -29,13 +31,17 @@ function Favorites({offers}) {
                 <li className="favorites__locations-items" key={cityName}>
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
-                      <a className="locations__item-link" href="#">
+                      <Link to={AppRoute.ROOT} className="locations__item-link">
                         <span>{cityName}</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
 
-                  <CardList offers={favoriteOffersGroupedByCityName[cityName]} currentPage='favorites'/>
+                  <CardList
+                    offers={favoriteOffersGroupedByCityName[cityName]}
+                    currentPage='favorites'
+                    hoverOnCard={(offerId) => setActiveOfferId(offerId)}
+                  />
                 </li>
               ))}
             </ul>
