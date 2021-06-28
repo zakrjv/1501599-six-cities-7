@@ -95,7 +95,7 @@ function Main({offersCount, offers, city}) {
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offers: placeCardProp,
+  offers: PropTypes.arrayOf(placeCardProp),
   city: PropTypes.shape({
     title: PropTypes.string.isRequired,
     lat: PropTypes.number.isRequired,

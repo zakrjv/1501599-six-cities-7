@@ -48,7 +48,7 @@ function Map({offers, city, activeOfferId}) {
 }
 
 Map.propTypes = {
-  offers: placeCardProp,
+  offers: PropTypes.arrayOf(placeCardProp),
   activeOfferId: PropTypes.number,
   city: PropTypes.shape({
     title: PropTypes.string.isRequired,

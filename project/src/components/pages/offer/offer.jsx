@@ -165,8 +165,8 @@ function Offer({reviews, offer, offers, city}) {
 }
 
 Offer.propTypes = {
-  reviews: reviewProp,
-  offers: placeCardProp,
+  reviews: PropTypes.arrayOf(reviewProp),
+  offers: PropTypes.arrayOf(placeCardProp),
   offer: placeCardProp,
   city: PropTypes.shape({
     title: PropTypes.string.isRequired,

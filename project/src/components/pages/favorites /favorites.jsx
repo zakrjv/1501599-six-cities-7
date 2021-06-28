@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Header from '../../elements-page/header/header';
 import {AppRoute} from '../../../const';
@@ -52,7 +53,7 @@ function Favorites({offers}) {
 }
 
 Favorites.propTypes = {
-  offers: placeCardProp,
+  offers: PropTypes.arrayOf(placeCardProp),
 };
 
 export default Favorites;

@@ -48,14 +48,14 @@ function App({offersCount, offers, city, reviews}) {
 
 App.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offers: placeCardProp,
+  offers: PropTypes.arrayOf(placeCardProp),
   city: PropTypes.shape({
     title: PropTypes.string.isRequired,
     lat: PropTypes.number.isRequired,
     lng: PropTypes.number.isRequired,
     zoom: PropTypes.number.isRequired,
   }).isRequired,
-  reviews: reviewProp,
+  reviews: PropTypes.arrayOf(reviewProp),
 };
 
 export default App;
