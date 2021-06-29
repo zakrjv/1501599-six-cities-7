@@ -12,7 +12,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentCity: action.payload,
-      }
+      };
     case ActionType.FILL_OFFERS:
       return {
         ...state,
