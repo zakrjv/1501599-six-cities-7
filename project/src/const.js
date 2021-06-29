@@ -24,9 +24,12 @@ const MapMarker = {
   URL_MARKER_ACTIVE: 'img/pin-active.svg',
 };
 
+const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam','Hamburg', 'Dusseldorf'];
+
 export {
   selectedRating,
   AppRoute,
   Page,
-  MapMarker
+  MapMarker,
+  CITIES
 };
