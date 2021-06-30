@@ -7,12 +7,16 @@ import {offers} from './mocks/offers';
 import {reviews} from './mocks/reviews';
 import {city} from './mocks/city';
 import {reducer} from './store/reducer';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 const Settings = {
   OFFERS_COUNT: 312,
 };
 
-const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  composeWithDevTools(),
+);
 
 ReactDOM.render(
   <React.StrictMode>
