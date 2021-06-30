@@ -4,9 +4,10 @@ import Header from '../../elements-page/header/header';
 import placeCardProp from '../../../props/place-card.prop';
 import CardList from '../../elements-page/card-list/card-list';
 import Map from '../../elements-page/map/map';
+import CitiesList from '../../elements-page/cities/cities-list/cities-list';
 
 function Main({offersCount, offers, city}) {
-  const [activeOfferId , setActiveOfferId] = useState(0);
+  const [activeOfferId, setActiveOfferId] = useState(0);
 
   return (
     <div className="page page--gray page--main">
@@ -15,40 +16,7 @@ function Main({offersCount, offers, city}) {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active" href='/#'>
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
+          <CitiesList/>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
