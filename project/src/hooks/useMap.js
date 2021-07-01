@@ -4,16 +4,16 @@ import {cities} from '../mocks/cities';
 
 function useMap(mapRef, currentCity) {
   const [map, setMap] = useState(null);
-  const initialCity = cities.find((city) => city.title === currentCity);
+  const cityName = cities.find((city) => city.title === currentCity);
 
   useEffect(() => {
     if (mapRef.current !== null && map === null) {
       const instance = leaflet.map(mapRef.current, {
-        center: initialCity.coordinates,
-        zoom: initialCity.zoom,
+        center: cityName.coordinates,
+        zoom: cityName.zoom,
       });
 
-      instance.setView(initialCity.coordinates, initialCity.zoom);
+      instance.setView(cityName.coordinates, cityName.zoom);
 
       leaflet
         .tileLayer(
@@ -27,10 +27,10 @@ function useMap(mapRef, currentCity) {
       setMap(instance);
 
     } else {
-      map.flyTo(initialCity.coordinates);
+      map.flyTo(cityName.coordinates);
     }
 
-  }, [mapRef, map, initialCity]);
+  }, [mapRef, map, cityName]);
 
   return map;
 }
