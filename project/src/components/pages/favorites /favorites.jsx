@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Header from '../../elements-page/header/header';
 import {AppRoute} from '../../../const';
-import CardList from '../../elements-page/card-list/card-list';
+import CardList from '../../elements-page/offers/card-list/card-list';
 import placeCardProp from '../../../props/place-card.prop';
 
 function Favorites({offers}) {

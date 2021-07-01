@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import PlaceCard from '../place-card/place-card';
-import placeCardProp from '../../../props/place-card.prop';
-import {Page} from '../../../const';
+import placeCardProp from '../../../../props/place-card.prop';
+import {Page} from '../../../../const';
 
 function CardList({offers, currentPage, hoverOnCard}) {
   return (

@@ -5,13 +5,13 @@ import {selectedRating} from '../../../const';
 import ReviewForm from '../../elements-page/review/review-form/review-form';
 import ReviewList from '../../elements-page/review/review-list/review-list';
 import Map from '../../elements-page/map/map';
-import CardList from '../../elements-page/card-list/card-list';
+import CardList from '../../elements-page/offers/card-list/card-list';
 import reviewProp from '../../../props/review.prop';
 import placeCardProp from '../../../props/place-card.prop';
 
 const OFFERS_COUNT = 3;
 
-function Offer({reviews, offer, offers, city}) {
+function Room({reviews, offer, offers, city}) {
   const {
     images,
     isPremium,
@@ -164,7 +164,7 @@ function Offer({reviews, offer, offers, city}) {
   );
 }
 
-Offer.propTypes = {
+Room.propTypes = {
   reviews: PropTypes.arrayOf(reviewProp),
   offers: PropTypes.arrayOf(placeCardProp),
   offer: placeCardProp,
@@ -176,4 +176,4 @@ Offer.propTypes = {
   }).isRequired,
 };
 
-export default Offer;
+export default Room;

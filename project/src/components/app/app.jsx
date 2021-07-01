@@ -4,7 +4,7 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import Main from '../pages/main/main';
 import Favorites from '../pages/favorites /favorites';
 import NotFound from '../pages/not-found /not-found';
-import Offer from '../pages/offer/offer';
+import Room from '../pages/room/room';
 import SignIn from '../pages/sign-in/sign-in';
 import {AppRoute} from '../../const';
 import placeCardProp from '../../props/place-card.prop';
@@ -26,7 +26,7 @@ function App({offersCount, offers, city, reviews}) {
         </Route>
         {offers.map((offer) => (
           <Route exact path={`${AppRoute.OFFER}/${offer.id}`} key={offer.id}>
-            <Offer
+            <Room
               key={offer.id}
               offer={offer}
               offers={offers}

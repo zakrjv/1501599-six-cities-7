@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../elements-page/header/header';
 import placeCardProp from '../../../props/place-card.prop';
-import CardList from '../../elements-page/card-list/card-list';
+import CardList from '../../elements-page/offers/card-list/card-list';
 import Map from '../../elements-page/map/map';
 import CitiesList from '../../elements-page/cities/cities-list/cities-list';
 
