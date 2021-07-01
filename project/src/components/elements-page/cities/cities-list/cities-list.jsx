@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {CITIES} from '../../../../const';
+import {ActionCreator} from '../../../../store/action';
 import City from '../city/city';
 
-function CitiesList() {
-  const [currentCity, setCurrentCity] = useState('Paris');
-
+function CitiesList({currentCity, changeCity}) {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
@@ -12,12 +13,29 @@ function CitiesList() {
           <City
             key={city}
             city={city}
-            currentCity={currentCity}
-            onClick={() => setCurrentCity(city)}
+            isActive={currentCity === city}
+            onClick={() => changeCity(city)}
           />
         ))}
       </ul>
     </section>
   );
 }
-export default CitiesList;
+
+CitiesList.propTypes = {
+  currentCity: PropTypes.string.isRequired,
+  changeCity: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  currentCity: state.currentCity,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCity(city) {
+    dispatch(ActionCreator.changeCity(city));
+  },
+});
+
+// export default CitiesList;
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

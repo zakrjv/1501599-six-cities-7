@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function City({city, currentCity, onClick}) {
+function City({city, isActive, onClick}) {
   return (
     <li className="locations__item">
       <a
-        className={`locations__item-link tabs__item ${currentCity === city && 'tabs__item--active'}`}
+        className={`locations__item-link tabs__item ${isActive && 'tabs__item--active'}`}
         href="/#"
         onClick={onClick}
       >
@@ -17,7 +17,7 @@ function City({city, currentCity, onClick}) {
 
 City.propTypes = {
   city: PropTypes.string.isRequired,
-  currentCity: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
