@@ -11,7 +11,7 @@ import placeCardProp from '../../../props/place-card.prop';
 
 const OFFERS_COUNT = 3;
 
-function Room({reviews, offer, offers, city}) {
+function Room({reviews, offer, offers}) {
   const {
     images,
     isPremium,
@@ -141,7 +141,6 @@ function Room({reviews, offer, offers, city}) {
 
             <Map
               offers={neighboringOffers}
-              city={city}
               activeOfferId={activeOfferId}
             />
           </section>
@@ -168,12 +167,6 @@ Room.propTypes = {
   reviews: PropTypes.arrayOf(reviewProp),
   offers: PropTypes.arrayOf(placeCardProp),
   offer: placeCardProp,
-  city: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-    zoom: PropTypes.number.isRequired,
-  }).isRequired,
 };
 
 export default Room;

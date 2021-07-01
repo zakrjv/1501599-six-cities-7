@@ -10,20 +10,19 @@ import {AppRoute} from '../../const';
 import placeCardProp from '../../props/place-card.prop';
 import reviewProp from '../../props/review.prop';
 
-function App({offersCount, offers, city, reviews}) {
+function App({offers, reviews}) {
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <Main
-            offersCount={offersCount}
-            offers={offers}
-            city={city}
-          />
+          <Main />
         </Route>
+
         <Route exact path={AppRoute.FAVORITES}>
           <Favorites offers={offers}/>
         </Route>
+
         {offers.map((offer) => (
           <Route exact path={`${AppRoute.OFFER}/${offer.id}`} key={offer.id}>
             <Room
@@ -31,30 +30,25 @@ function App({offersCount, offers, city, reviews}) {
               offer={offer}
               offers={offers}
               reviews={reviews}
-              city={city}
             />
           </Route>
         ))}
+
         <Route exact path={AppRoute.LOGIN}>
           <SignIn/>
         </Route>
+
         <Route>
           <NotFound/>
         </Route>
+
       </Switch>
     </BrowserRouter>
   );
 }
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(placeCardProp),
-  city: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-    zoom: PropTypes.number.isRequired,
-  }).isRequired,
   reviews: PropTypes.arrayOf(reviewProp),
 };
 

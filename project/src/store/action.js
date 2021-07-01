@@ -1,6 +1,6 @@
 export const ActionType = {
   CHANGE_CITY: 'main/changeCity',
-  FILL_OFFERS: 'main/fillOffers',
+  SET_OFFERS: 'main/setOffers',
 };
 
 export const ActionCreator = {
@@ -8,9 +8,8 @@ export const ActionCreator = {
     type: ActionType.CHANGE_CITY,
     payload: city,
   }),
-  fillOffers: (offers) => ({
-    type: ActionType.FILL_OFFERS,
+  setOffers: (offers) => ({
+    type: ActionType.SET_OFFERS,
     payload: offers,
   }),
 };
-

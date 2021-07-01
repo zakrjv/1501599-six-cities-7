@@ -16,8 +16,9 @@ function CardList({offers, currentPage, hoverOnCard}) {
       {offers.map((offer) => (
         <PlaceCard
           offer={offer}
+          key={offer.id}
           onCardMouseEnter={() => hoverOnCard(offer.id)}
-          currentPage={currentPage} key={offer.id}
+          currentPage={currentPage}
         />
       ))}
     </div>
@@ -31,6 +32,5 @@ CardList.propTypes = {
   currentPage: PropTypes.string.isRequired,
   hoverOnCard: PropTypes.func.isRequired,
 };
-
 
 export default CardList;

@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import Header from '../../elements-page/header/header';
 import placeCardProp from '../../../props/place-card.prop';
 import CardList from '../../elements-page/offers/card-list/card-list';
 import Map from '../../elements-page/map/map';
 import CitiesList from '../../elements-page/cities/cities-list/cities-list';
 
-function Main({offersCount, offers, city}) {
+function Main({offers, currentCity}) {
   const [activeOfferId, setActiveOfferId] = useState(0);
+
+  const offersList = offers.filter((offer) => (offer.city.name === currentCity));
+  const offersCount = offersList.length;
 
   return (
     <div className="page page--gray page--main">
@@ -16,13 +20,15 @@ function Main({offersCount, offers, city}) {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesList/>
+          <CitiesList
+            currentCity={currentCity}
+          />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offersCount} places to stay in {currentCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -39,17 +45,17 @@ function Main({offersCount, offers, city}) {
                 </ul>
               </form>
               <CardList
-                offers={offers}
+                offers={offersList}
                 currentPage='main'
                 hoverOnCard={(offerId) => setActiveOfferId(offerId)}
+
               />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
 
                 <Map
-                  offers={offers}
-                  city={city}
+                  offers={offersList}
                   activeOfferId={activeOfferId}
                 />
               </section>
@@ -62,14 +68,14 @@ function Main({offersCount, offers, city}) {
 }
 
 Main.propTypes = {
-  offersCount: PropTypes.number.isRequired,
+  currentCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(placeCardProp),
-  city: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-    zoom: PropTypes.number.isRequired,
-  }).isRequired,
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  currentCity: state.currentCity,
+  offers: state.offers,
+});
+
+// export default Main;
+export default connect(mapStateToProps)(Main);
