@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import Header from '../../elements-page/header/header';
 import {selectedRating} from '../../../const';
 import ReviewForm from '../../elements-page/review/review-form/review-form';
@@ -169,4 +170,10 @@ Room.propTypes = {
   offer: placeCardProp,
 };
 
-export default Room;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  reviews: state.reviews,
+});
+
+// export default Room;
+export default connect(mapStateToProps)(Room);

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Header from '../../elements-page/header/header';
 import {AppRoute} from '../../../const';
@@ -62,4 +63,9 @@ Favorites.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp),
 };
 
-export default Favorites;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+// export default Favorites;
+export default connect(mapStateToProps)(Favorites);

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import Main from '../pages/main/main';
 import Favorites from '../pages/favorites /favorites';
@@ -8,19 +9,18 @@ import Room from '../pages/room/room';
 import SignIn from '../pages/sign-in/sign-in';
 import {AppRoute} from '../../const';
 import placeCardProp from '../../props/place-card.prop';
-import reviewProp from '../../props/review.prop';
 
-function App({offers, reviews}) {
+function App({offers}) {
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <Main />
+          <Main/>
         </Route>
 
         <Route exact path={AppRoute.FAVORITES}>
-          <Favorites offers={offers}/>
+          <Favorites/>
         </Route>
 
         {offers.map((offer) => (
@@ -28,8 +28,6 @@ function App({offers, reviews}) {
             <Room
               key={offer.id}
               offer={offer}
-              offers={offers}
-              reviews={reviews}
             />
           </Route>
         ))}
@@ -49,7 +47,11 @@ function App({offers, reviews}) {
 
 App.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp),
-  reviews: PropTypes.arrayOf(reviewProp),
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+// export default App;
+export default connect(mapStateToProps)(App);
