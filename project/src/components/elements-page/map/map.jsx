@@ -61,6 +61,7 @@ Map.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  offers: state.offers,
   cities: state.cities.find((city) => city.title === state.currentCity),
 });
 

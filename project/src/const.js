@@ -24,6 +24,13 @@ const MapMarker = {
   URL_MARKER_ACTIVE: 'img/pin-active.svg',
 };
 
+const Options = {
+  POPULAR: 'Popular',
+  LOW_TO_HIGH: 'Price: low to high',
+  HIGH_TO_LOW: 'Price: high to low',
+  TOP_RATED_FIRST: 'Top rated first',
+};
+
 const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam','Hamburg', 'Dusseldorf'];
 
 export {
@@ -31,5 +38,6 @@ export {
   AppRoute,
   Page,
   MapMarker,
-  CITIES
+  CITIES,
+  Options
 };

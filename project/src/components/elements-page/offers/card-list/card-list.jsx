@@ -1,9 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import clsx from 'clsx';
 import PlaceCard from '../place-card/place-card';
 import placeCardProp from '../../../../props/place-card.prop';
-import {Page} from '../../../../const';
+import {Page, Options} from '../../../../const';
+
+const sortOffers = (offersCards, option) => {
+  switch (option) {
+    case Options.POPULAR:
+      return offersCards;
+    case Options.LOW_TO_HIGH:
+      return offersCards.slice().sort((a, b) => a.price - b.price);
+    case Options.HIGH_TO_LOW:
+      return offersCards.slice().sort((a, b) => b.price - a.price);
+    case Options.TOP_RATED_FIRST:
+      return offersCards.slice().sort((a, b) => b.rating - a.rating);
+    default:
+      return offersCards;
+  }
+};
 
 function CardList({offers, currentPage, hoverOnCard}) {
   return (
@@ -33,4 +49,63 @@ CardList.propTypes = {
   hoverOnCard: PropTypes.func.isRequired,
 };
 
-export default CardList;
+const mapStateToProps = (state) => ({
+  offers: sortOffers(state.offers.filter((offer) => (offer.city.name === state.currentCity)), state.currentOption),
+});
+
+// export default CardList;
+export default connect(mapStateToProps)(CardList);
+
+
+// const sortOffers = (offersCards, option) => {
+//   switch (option) {
+//     case Options.POPULAR:
+//       return offersCards;
+//     case Options.LOW_TO_HIGH:
+//       return offersCards.slice().sort((a, b) => a.price - b.price);
+//     case Options.HIGH_TO_LOW:
+//       return offersCards.slice().sort((a, b) => b.price - a.price);
+//     case Options.TOP_RATED_FIRST:
+//       return offersCards.slice().sort((a, b) => b.rating - a.rating);
+//     default:
+//       return offersCards;
+//   }
+// };
+//
+// function CardList({offersListByCity, currentPage, hoverOnCard, currentOption}) {
+//   const offersList = sortOffers(offersListByCity, currentOption);
+//
+//   return (
+//     <div className={clsx({
+//       'favorites__places': currentPage === Page.FAVORITES,
+//       'near-places__list places__list': currentPage === Page.OFFER,
+//       'cities__places-list places__list tabs__content': currentPage === Page.MAIN,
+//     })}
+//     >
+//       {offersList.map((offer) => (
+//         <PlaceCard
+//           offer={offer}
+//           key={offer.id}
+//           onCardMouseEnter={() => hoverOnCard(offer.id)}
+//           currentPage={currentPage}
+//         />
+//       ))}
+//     </div>
+//   );
+// }
+//
+// CardList.propTypes = {
+//   offersListByCity: PropTypes.arrayOf(
+//     placeCardProp,
+//   ).isRequired,
+//   currentPage: PropTypes.string.isRequired,
+//   hoverOnCard: PropTypes.func.isRequired,
+//   currentOption: PropTypes.string.isRequired,
+// };
+//
+// const mapStateToProps = (state) => ({
+//   currentOption: state.currentOption,
+// });
+//
+// // export default CardList;
+// export default connect(mapStateToProps)(CardList);
