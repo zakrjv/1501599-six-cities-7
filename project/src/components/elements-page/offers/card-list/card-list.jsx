@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import PlaceCard from '../place-card/place-card';
 import placeCardProp from '../../../../props/place-card.prop';
 import {Page, Options} from '../../../../const';
-import {filtersOffersByCity} from "../../../../utils";
+import {filtersOffersByCity} from '../../../../utils';
 
 const sortOffers = (offersCards, option) => {
   switch (option) {
