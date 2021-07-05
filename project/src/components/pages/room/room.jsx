@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import Header from '../../elements-page/header/header';
 import {selectedRating} from '../../../const';
 import ReviewForm from '../../elements-page/review/review-form/review-form';
 import ReviewList from '../../elements-page/review/review-list/review-list';
 import Map from '../../elements-page/map/map';
-import CardList from '../../elements-page/card-list/card-list';
-import reviewProp from '../../../props/review.prop';
+import CardList from '../../elements-page/offers/card-list/card-list';
 import placeCardProp from '../../../props/place-card.prop';
 
 const OFFERS_COUNT = 3;
 
-function Offer({reviews, offer, offers, city}) {
+function Room({offer, offers}) {
   const {
     images,
     isPremium,
@@ -46,7 +46,7 @@ function Offer({reviews, offer, offers, city}) {
             <div className="property__gallery">
               {images.map((img) => (
                 <div key={img} className="property__image-wrapper">
-                  <img className="property__image" src={img} alt="Photo studio"/>
+                  <img className="property__image" src={img} alt="Studio"/>
                 </div>
               ))}
             </div>
@@ -132,7 +132,7 @@ function Offer({reviews, offer, offers, city}) {
               </div>
               <section className="property__reviews reviews">
 
-                <ReviewList reviews={reviews}/>
+                <ReviewList/>
                 <ReviewForm/>
               </section>
             </div>
@@ -141,7 +141,6 @@ function Offer({reviews, offer, offers, city}) {
 
             <Map
               offers={neighboringOffers}
-              city={city}
               activeOfferId={activeOfferId}
             />
           </section>
@@ -164,16 +163,14 @@ function Offer({reviews, offer, offers, city}) {
   );
 }
 
-Offer.propTypes = {
-  reviews: reviewProp,
-  offers: placeCardProp,
+Room.propTypes = {
+  offers: PropTypes.arrayOf(placeCardProp),
   offer: placeCardProp,
-  city: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-    zoom: PropTypes.number.isRequired,
-  }).isRequired,
 };
 
-export default Offer;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+// export default Room;
+export default connect(mapStateToProps)(Room);

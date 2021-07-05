@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import useMap from '../../../hooks/useMap';
 import placeCardProp from '../../../props/place-card.prop';
 import {MapMarker} from '../../../const';
+import {connect} from 'react-redux';
 
 const defaultCustomIcon = leaflet.icon({
   iconUrl: MapMarker.URL_MARKER_DEFAULT,
@@ -18,23 +19,29 @@ const activeCustomIcon = leaflet.icon({
   iconAnchor: [15, 30],
 });
 
-function Map({offers, city, activeOfferId}) {
+function Map({offers, activeOfferId, cities}) {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef, cities.coordinates, cities.zoom);
 
   useEffect(() => {
+    const markersLayer = new leaflet.LayerGroup();
+
     if (map) {
       offers.forEach(({id, location}) => {
-        leaflet
+        const marker = leaflet
           .marker({
             lat: location.latitude,
             lng: location.longitude,
           }, {
             icon: id === activeOfferId ? activeCustomIcon : defaultCustomIcon,
-          })
-          .addTo(map);
+          });
+        markersLayer.addLayer(marker);
       });
+
+      markersLayer.addTo(map);
     }
+
+    return () => markersLayer.removeFrom(map);
   }, [map, offers, activeOfferId]);
 
 
@@ -48,14 +55,14 @@ function Map({offers, city, activeOfferId}) {
 }
 
 Map.propTypes = {
-  offers: placeCardProp,
-  activeOfferId: PropTypes.number,
-  city: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-    zoom: PropTypes.number.isRequired,
-  }).isRequired,
+  offers: PropTypes.arrayOf(placeCardProp).isRequired,
+  activeOfferId: PropTypes.number.isRequired,
+  cities: PropTypes.object.isRequired,
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  cities: state.cities.find((city) => city.title === state.currentCity),
+});
+
+// export default Map;
+export default connect(mapStateToProps)(Map);

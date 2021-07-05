@@ -37,7 +37,6 @@ function ReviewItem({review}) {
         <p className="reviews__text">
           {comment}
         </p>
-        {/*<time className="reviews__time" dateTime="2019-04-24">April 2019</time>*/}
         <time className="reviews__time" dateTime={dayjs(date).format('YYYY-MM-DD')}>{dayjs(date).format('MMMM YYYY')}</time>
       </div>
     </li>

@@ -1,18 +1,17 @@
 import {useEffect, useState} from 'react';
 import leaflet from 'leaflet';
 
-function useMap(mapRef, city) {
+function useMap(mapRef, coordinates, zoom) {
   const [map, setMap] = useState(null);
 
   useEffect(() => {
     if (mapRef.current !== null && map === null) {
       const instance = leaflet.map(mapRef.current, {
-        center: {
-          lat: city.lat,
-          lng: city.lng,
-        },
-        zoom: city.zoom,
+        center: coordinates,
+        zoom: zoom,
       });
+
+      instance.setView(coordinates, zoom);
 
       leaflet
         .tileLayer(
@@ -24,8 +23,12 @@ function useMap(mapRef, city) {
         .addTo(instance);
 
       setMap(instance);
+
+    } else {
+      map.flyTo(coordinates);
     }
-  }, [mapRef, map, city]);
+
+  }, [mapRef, map, coordinates, zoom]);
 
   return map;
 }

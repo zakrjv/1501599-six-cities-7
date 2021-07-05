@@ -1,7 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import ReviewItem from '../review-item/review-item';
 import dayjs from 'dayjs';
 import reviewProp from '../../../../props/review.prop';
+import PropTypes from 'prop-types';
 
 const REVIEWS_MAX_COUNT = 10;
 
@@ -20,14 +22,12 @@ const getSortedReviews = (reviews) => {
 };
 
 function ReviewList({reviews}) {
-  const sortedReviews = getSortedReviews(reviews);
-
   return (
     <>
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{sortedReviews.length}</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
         {
-          sortedReviews.map((review) => (
+          reviews.map((review) => (
             <ReviewItem
               key={review.id}
               review={review}
@@ -40,7 +40,12 @@ function ReviewList({reviews}) {
 }
 
 ReviewList.propTypes = {
-  reviews: reviewProp,
+  reviews: PropTypes.arrayOf(reviewProp),
 };
 
-export default ReviewList;
+const mapStateToProps = (state) => ({
+  reviews: getSortedReviews(state.reviews),
+});
+
+// export default ReviewList;
+export default connect(mapStateToProps)(ReviewList);

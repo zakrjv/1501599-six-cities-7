@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import clsx from 'clsx';
-import placeCardProp from '../../../props/place-card.prop';
-import {selectedRating, Page, AppRoute} from '../../../const';
+import placeCardProp from '../../../../props/place-card.prop';
+import {selectedRating, Page, AppRoute} from '../../../../const';
 
 function PlaceCard({offer, onCardMouseEnter, currentPage}) {
   const {
@@ -63,7 +63,7 @@ function PlaceCard({offer, onCardMouseEnter, currentPage}) {
               '110': currentPage === Page.FAVORITES,
               '200': currentPage === Page.MAIN || currentPage === Page.OFFER,
             })}
-            alt="Place image"
+            alt="Place"
           />
         </Link>
       </div>
