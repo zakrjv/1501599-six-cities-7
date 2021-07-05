@@ -9,10 +9,6 @@ export const ActionCreator = {
     type: ActionType.CHANGE_CITY,
     payload: city,
   }),
-  setOffers: (city) => ({
-    type: ActionType.SET_OFFERS,
-    payload: city,
-  }),
   changeSorting: (option) => ({
     type: ActionType.CHANGE_SORTING,
     payload: option,

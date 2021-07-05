@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import PlaceCard from '../place-card/place-card';
 import placeCardProp from '../../../../props/place-card.prop';
 import {Page, Options} from '../../../../const';
+import {filtersOffersByCity} from "../../../../utils";
 
 const sortOffers = (offersCards, option) => {
   switch (option) {
@@ -21,7 +22,7 @@ const sortOffers = (offersCards, option) => {
   }
 };
 
-function CardList({offersByCity, currentPage, hoverOnCard}) {
+function CardList({offers, currentPage, hoverOnCard}) {
   return (
     <div className={clsx({
       'favorites__places': currentPage === Page.FAVORITES,
@@ -29,7 +30,7 @@ function CardList({offersByCity, currentPage, hoverOnCard}) {
       'cities__places-list places__list tabs__content': currentPage === Page.MAIN,
     })}
     >
-      {offersByCity.map((offer) => (
+      {offers.map((offer) => (
         <PlaceCard
           offer={offer}
           key={offer.id}
@@ -42,13 +43,13 @@ function CardList({offersByCity, currentPage, hoverOnCard}) {
 }
 
 CardList.propTypes = {
-  offersByCity: PropTypes.arrayOf(placeCardProp).isRequired,
+  offers: PropTypes.arrayOf(placeCardProp).isRequired,
   currentPage: PropTypes.string.isRequired,
   hoverOnCard: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offersByCity: sortOffers(state.offersByCity, state.currentOption),
+  offers: sortOffers(filtersOffersByCity(state.offers, state.currentCity), state.currentOption),
 });
 
 // export default CardList;

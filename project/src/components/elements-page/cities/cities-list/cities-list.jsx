@@ -5,7 +5,7 @@ import {CITIES} from '../../../../const';
 import {ActionCreator} from '../../../../store/action';
 import City from '../city/city';
 
-function CitiesList({currentCity, changeCity, setOffers}) {
+function CitiesList({currentCity, changeCity}) {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
@@ -14,10 +14,7 @@ function CitiesList({currentCity, changeCity, setOffers}) {
             key={city}
             city={city}
             isActive={currentCity === city}
-            onClick={() => {
-              changeCity(city);
-              setOffers(city);
-            }}
+            onClick={() => changeCity(city)}
           />
         ))}
       </ul>
@@ -28,7 +25,6 @@ function CitiesList({currentCity, changeCity, setOffers}) {
 CitiesList.propTypes = {
   currentCity: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
-  setOffers: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -38,9 +34,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeCity(city) {
     dispatch(ActionCreator.changeCity(city));
-  },
-  setOffers(city) {
-    dispatch(ActionCreator.setOffers(city));
   },
 });
 
