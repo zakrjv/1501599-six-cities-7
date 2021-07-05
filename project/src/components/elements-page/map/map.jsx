@@ -55,7 +55,7 @@ function Map({offersByCity, activeOfferId, cities}) {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(placeCardProp).isRequired,
+  offersByCity: PropTypes.arrayOf(placeCardProp).isRequired,
   activeOfferId: PropTypes.number.isRequired,
   cities: PropTypes.object.isRequired,
 };
