@@ -20,9 +20,9 @@ const activeCustomIcon = leaflet.icon({
   iconAnchor: [15, 30],
 });
 
-function Map({offers, activeOfferId, cities, currentCity}) {
+function Map({offers, activeOfferId, cities}) {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, cities, currentCity);
+  const map = useMap(mapRef, cities);
 
   useEffect(() => {
     const markersLayer = new leaflet.LayerGroup();
@@ -59,12 +59,10 @@ Map.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp),
   activeOfferId: PropTypes.number,
   cities: PropTypes.arrayOf(citiesProp),
-  currentCity: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  currentCity: state.currentCity,
-  cities: state.cities,
+  cities: state.cities.find((city) => city.title === state.currentCity),
 });
 
 // export default Map;

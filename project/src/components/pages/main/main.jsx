@@ -10,9 +10,6 @@ import CitiesList from '../../elements-page/cities/cities-list/cities-list';
 function Main({offers, currentCity}) {
   const [activeOfferId, setActiveOfferId] = useState(0);
 
-  const offersList = offers.filter((offer) => (offer.city.name === currentCity));
-  const offersCount = offersList.length;
-
   return (
     <div className="page page--gray page--main">
       <Header/>
@@ -28,7 +25,7 @@ function Main({offers, currentCity}) {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersCount} places to stay in {currentCity}</b>
+              <b className="places__found">{offers.length} places to stay in {currentCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -45,7 +42,7 @@ function Main({offers, currentCity}) {
                 </ul>
               </form>
               <CardList
-                offers={offersList}
+                offers={offers}
                 currentPage='main'
                 hoverOnCard={(offerId) => setActiveOfferId(offerId)}
 
@@ -55,7 +52,7 @@ function Main({offers, currentCity}) {
               <section className="cities__map map">
 
                 <Map
-                  offers={offersList}
+                  offers={offers}
                   activeOfferId={activeOfferId}
                 />
               </section>
@@ -74,7 +71,7 @@ Main.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentCity: state.currentCity,
-  offers: state.offers,
+  offers: state.offers.filter((offer) => (offer.city.name === state.currentCity)),
 });
 
 // export default Main;
