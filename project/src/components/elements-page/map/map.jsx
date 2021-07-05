@@ -21,7 +21,7 @@ const activeCustomIcon = leaflet.icon({
 
 function Map({offers, activeOfferId, cities}) {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, cities);
+  const map = useMap(mapRef, cities.coordinates, cities.zoom);
 
   useEffect(() => {
     const markersLayer = new leaflet.LayerGroup();
