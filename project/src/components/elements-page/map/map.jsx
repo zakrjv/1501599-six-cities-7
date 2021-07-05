@@ -19,7 +19,7 @@ const activeCustomIcon = leaflet.icon({
   iconAnchor: [15, 30],
 });
 
-function Map({offers, activeOfferId, cities}) {
+function Map({offersByCity, activeOfferId, cities}) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, cities.coordinates, cities.zoom);
 
@@ -27,7 +27,7 @@ function Map({offers, activeOfferId, cities}) {
     const markersLayer = new leaflet.LayerGroup();
 
     if (map) {
-      offers.forEach(({id, location}) => {
+      offersByCity.forEach(({id, location}) => {
         const marker = leaflet
           .marker({
             lat: location.latitude,
@@ -42,7 +42,7 @@ function Map({offers, activeOfferId, cities}) {
     }
 
     return () => markersLayer.removeFrom(map);
-  }, [map, offers, activeOfferId]);
+  }, [map, offersByCity, activeOfferId]);
 
 
   return (
@@ -61,7 +61,7 @@ Map.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  offersByCity: state.offersByCity,
   cities: state.cities.find((city) => city.title === state.currentCity),
 });
 

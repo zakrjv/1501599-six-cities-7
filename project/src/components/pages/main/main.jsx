@@ -8,7 +8,7 @@ import Map from '../../elements-page/map/map';
 import CitiesList from '../../elements-page/cities/cities-list/cities-list';
 import SortingForm from '../../elements-page/sorting/sorting-form/sorting-form';
 
-function Main({offers, currentCity}) {
+function Main({offersByCity, currentCity}) {
   const [activeOfferId, setActiveOfferId] = useState(0);
 
   return (
@@ -18,20 +18,19 @@ function Main({offers, currentCity}) {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesList
-            currentCity={currentCity}
-          />
+
+          <CitiesList/>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {currentCity}</b>
+              <b className="places__found">{offersByCity.length} places to stay in {currentCity}</b>
               <SortingForm/>
+
               <CardList
                 currentPage='main'
                 hoverOnCard={(offerId) => setActiveOfferId(offerId)}
-
               />
             </section>
             <div className="cities__right-section">
@@ -51,12 +50,12 @@ function Main({offers, currentCity}) {
 
 Main.propTypes = {
   currentCity: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(placeCardProp),
+  offersByCity: PropTypes.arrayOf(placeCardProp),
 };
 
 const mapStateToProps = (state) => ({
   currentCity: state.currentCity,
-  offers: state.offers.filter((offer) => (offer.city.name === state.currentCity)),
+  offersByCity: state.offersByCity,
 });
 
 // export default Main;
