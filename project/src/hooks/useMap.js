@@ -1,8 +1,7 @@
 import {useEffect, useState} from 'react';
 import leaflet from 'leaflet';
-import {cities} from '../mocks/cities';
 
-function useMap(mapRef, currentCity) {
+function useMap(mapRef, cities, currentCity) {
   const [map, setMap] = useState(null);
   const cityName = cities.find((city) => city.title === currentCity);
 
