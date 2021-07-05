@@ -4,7 +4,6 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../../hooks/useMap';
 import placeCardProp from '../../../props/place-card.prop';
-import citiesProp from '../../../props/cities.prop';
 import {MapMarker} from '../../../const';
 import {connect} from 'react-redux';
 
@@ -56,9 +55,9 @@ function Map({offers, activeOfferId, cities}) {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(placeCardProp),
-  activeOfferId: PropTypes.number,
-  cities: PropTypes.arrayOf(citiesProp),
+  offers: PropTypes.arrayOf(placeCardProp).isRequired,
+  activeOfferId: PropTypes.number.isRequired,
+  cities: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({

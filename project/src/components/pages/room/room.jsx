@@ -7,12 +7,11 @@ import ReviewForm from '../../elements-page/review/review-form/review-form';
 import ReviewList from '../../elements-page/review/review-list/review-list';
 import Map from '../../elements-page/map/map';
 import CardList from '../../elements-page/offers/card-list/card-list';
-import reviewProp from '../../../props/review.prop';
 import placeCardProp from '../../../props/place-card.prop';
 
 const OFFERS_COUNT = 3;
 
-function Room({reviews, offer, offers}) {
+function Room({offer, offers}) {
   const {
     images,
     isPremium,
@@ -133,7 +132,7 @@ function Room({reviews, offer, offers}) {
               </div>
               <section className="property__reviews reviews">
 
-                <ReviewList reviews={reviews}/>
+                <ReviewList/>
                 <ReviewForm/>
               </section>
             </div>
@@ -165,14 +164,12 @@ function Room({reviews, offer, offers}) {
 }
 
 Room.propTypes = {
-  reviews: PropTypes.arrayOf(reviewProp),
   offers: PropTypes.arrayOf(placeCardProp),
   offer: placeCardProp,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
-  reviews: state.reviews,
 });
 
 // export default Room;
