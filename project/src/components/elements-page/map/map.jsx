@@ -6,6 +6,7 @@ import useMap from '../../../hooks/useMap';
 import placeCardProp from '../../../props/place-card.prop';
 import {MapMarker} from '../../../const';
 import {connect} from 'react-redux';
+import {filtersOffersByCity} from '../../../utils';
 
 const defaultCustomIcon = leaflet.icon({
   iconUrl: MapMarker.URL_MARKER_DEFAULT,
@@ -61,6 +62,7 @@ Map.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  offers: filtersOffersByCity(state.offers, state.currentCity),
   cities: state.cities.find((city) => city.title === state.currentCity),
 });
 
