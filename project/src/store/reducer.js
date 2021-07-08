@@ -1,16 +1,16 @@
 import {ActionType} from './action';
 import {CITIES, Options, AuthorizationStatus} from '../const';
-import {offers} from '../mocks/offers';
 import {reviews} from '../mocks/reviews';
 import {cities} from '../mocks/cities';
 
 const initialState = {
   currentCity: CITIES[0],
-  offers: offers,
+  offers: [],
   reviews: reviews,
   cities: cities,
   currentOption: Options.POPULAR,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
+  isDataLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,7 +28,8 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS:
       return {
         ...state,
-        offers: action.offers,
+        offers: action.payload,
+        isDataLoaded: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {

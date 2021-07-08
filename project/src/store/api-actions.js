@@ -1,6 +1,6 @@
 import {ActionCreator} from './action';
 import {APIRoute, AuthorizationStatus} from '../const';
-import {adaptToClient} from '../adapter'
+import {adaptToClient} from '../adapter';
 
 const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
@@ -30,4 +30,4 @@ export {
   checkAuth,
   login,
   logout
-}
+};
