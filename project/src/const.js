@@ -19,6 +19,12 @@ const AuthorizationStatus = {
   UNKNOWN: 'UNKNOWN',
 };
 
+const APIRoute = {
+  OFFERS: '/hotels',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+};
+
 const Page = {
   FAVORITES: 'favorites',
   OFFER: 'offer',
@@ -46,5 +52,6 @@ export {
   MapMarker,
   CITIES,
   Options,
-  AuthorizationStatus
+  AuthorizationStatus,
+  APIRoute
 };
