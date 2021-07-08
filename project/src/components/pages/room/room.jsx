@@ -34,7 +34,6 @@ function Room({offer, offers}) {
   } = host;
 
   const [activeOfferId, setActiveOfferId] = useState(0);
-  const neighboringOffers = offers.slice(0, OFFERS_COUNT);
 
   return (
     <div className="page">
@@ -140,7 +139,7 @@ function Room({offer, offers}) {
           <section className="property__map map">
 
             <Map
-              offers={neighboringOffers}
+              offers={offers}
               activeOfferId={activeOfferId}
             />
           </section>
@@ -151,7 +150,7 @@ function Room({offer, offers}) {
             <div className="near-places__list places__list">
 
               <CardList
-                offers={neighboringOffers}
+                offers={offers}
                 currentPage='offer'
                 hoverOnCard={(offerId) => setActiveOfferId(offerId)}
               />
@@ -169,7 +168,7 @@ Room.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  offers: state.offers.slice(0, OFFERS_COUNT),
 });
 
 // export default Room;

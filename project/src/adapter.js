@@ -8,7 +8,7 @@ export const adaptToClient = (offer) => {
       rating: offer.rating,
       price: offer.price,
       type: offer.type,
-      isFavorite: offer['is_favorite'],
+      isFavorites: offer['is_favorite'],
       isPremium: offer['is_premium'],
       previewImage: offer['preview_image'],
       bedrooms: offer.bedrooms,
