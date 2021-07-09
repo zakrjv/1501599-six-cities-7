@@ -22,7 +22,7 @@ const sortOffers = (offersCards, option) => {
   }
 };
 
-function CardList({offers, currentPage, hoverOnCard}) {
+function CardList({offers, currentPage, hoverOnCard, onMouseLeave}) {
   return (
     <div className={clsx({
       'favorites__places': currentPage === Page.FAVORITES,
@@ -36,6 +36,7 @@ function CardList({offers, currentPage, hoverOnCard}) {
           key={offer.id}
           onCardMouseEnter={() => hoverOnCard(offer.id)}
           currentPage={currentPage}
+          onMouseLeave={onMouseLeave}
         />
       ))}
     </div>
@@ -46,6 +47,7 @@ CardList.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp).isRequired,
   currentPage: PropTypes.string.isRequired,
   hoverOnCard: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

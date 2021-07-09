@@ -159,6 +159,7 @@ function Room({offer, offers, loadReviews}) {
                 offers={offers}
                 currentPage='offer'
                 hoverOnCard={(offerId) => setActiveOfferId(offerId)}
+                onMouseLeave={() => setActiveOfferId(0)}
               />
             </div>
           </section>

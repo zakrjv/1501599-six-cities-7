@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import placeCardProp from '../../../../props/place-card.prop';
 import {selectedRating, Page, AppRoute} from '../../../../const';
 
-function PlaceCard({offer, onCardMouseEnter, currentPage}) {
+function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
   const {
     id,
     previewImage,
@@ -44,6 +44,7 @@ function PlaceCard({offer, onCardMouseEnter, currentPage}) {
         'cities__place-card': currentPage === Page.MAIN,
       })}
       onMouseEnter={onCardMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={clsx('place-card__image-wrapper', {
@@ -96,6 +97,7 @@ function PlaceCard({offer, onCardMouseEnter, currentPage}) {
 PlaceCard.propTypes = {
   offer: placeCardProp,
   onCardMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
   currentPage: PropTypes.string.isRequired,
 };
 
