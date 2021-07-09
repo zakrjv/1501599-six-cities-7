@@ -1,3 +1,9 @@
-const filtersOffersByCity = (offers, cityName) => offers.filter((offer) => (offer.city.name === cityName));
+import {AuthorizationStatus} from './const';
 
-export {filtersOffersByCity};
+const filtersOffersByCity = (offers, cityName) => offers.filter((offer) => (offer.city.name === cityName));
+const isCheckedAuth = (authorizationStatus) => authorizationStatus === AuthorizationStatus.UNKNOWN;
+
+export {
+  filtersOffersByCity,
+  isCheckedAuth
+};

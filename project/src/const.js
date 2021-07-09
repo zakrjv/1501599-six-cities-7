@@ -13,6 +13,18 @@ const AppRoute = {
   OFFER: '/room',
 };
 
+const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
+};
+
+const APIRoute = {
+  OFFERS: '/hotels',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+};
+
 const Page = {
   FAVORITES: 'favorites',
   OFFER: 'offer',
@@ -39,5 +51,7 @@ export {
   Page,
   MapMarker,
   CITIES,
-  Options
+  Options,
+  AuthorizationStatus,
+  APIRoute
 };
