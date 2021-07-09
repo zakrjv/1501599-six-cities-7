@@ -10,6 +10,7 @@ const initialState = {
   currentOption: Options.POPULAR,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   isDataLoaded: false,
+  userData: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -45,6 +46,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+      };
+    case ActionType.LOAD_USER_DATA:
+      return {
+        ...state,
+        userData: action.payload,
       };
     default:
       return state;

@@ -2,8 +2,10 @@ export const ActionType = {
   CHANGE_CITY: 'main/changeCity',
   SET_OFFERS: 'main/setOffers',
   CHANGE_SORTING: 'main/changeSorting',
+  REDIRECT_TO_ROUTE: 'main/redirectToRoute',
   LOAD_OFFERS: 'data/loadOffers',
   LOAD_REVIEWS: 'data/loadReviews',
+  LOAD_USER_DATA: 'data/loadUserData',
   REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
   LOGOUT: 'user/logout',
 };
@@ -31,5 +33,13 @@ export const ActionCreator = {
   }),
   logout: () => ({
     type: ActionType.LOGOUT,
+  }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
+  }),
+  loadUserData: (userData) => ({
+    type: ActionType.LOAD_USER_DATA,
+    payload: userData,
   }),
 };

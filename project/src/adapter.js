@@ -70,7 +70,28 @@ const adaptReviewToClient = (review) => {
   return adaptedReview;
 };
 
+const adaptUserToClient = (userData) => {
+  const adaptedUser = Object.assign(
+    {},
+    userData,
+    {
+      avatarUrl: userData['avatar_url'],
+      email: userData.email,
+      id: userData.id,
+      isPro: userData['is_pro'],
+      name: userData.name,
+      token: userData.token,
+    });
+
+  delete adaptedUser['avatar_url'];
+  delete adaptedUser['is_pro'];
+
+  return adaptedUser;
+};
+
+
 export {
   adaptOffersToClient,
-  adaptReviewToClient
+  adaptReviewToClient,
+  adaptUserToClient
 };

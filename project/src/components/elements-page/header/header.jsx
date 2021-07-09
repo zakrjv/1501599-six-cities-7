@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Logo from '../logo/logo';
 import UserNotLogged from './user-not-auth/user-not-logged';
@@ -26,4 +27,9 @@ Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+});
+
+// export {Header};
+export default connect(mapStateToProps)(Header);
