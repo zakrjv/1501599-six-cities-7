@@ -3,6 +3,7 @@ export const ActionType = {
   SET_OFFERS: 'main/setOffers',
   CHANGE_SORTING: 'main/changeSorting',
   LOAD_OFFERS: 'data/loadOffers',
+  LOAD_REVIEWS: 'data/loadReviews',
   REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
   LOGOUT: 'user/logout',
 };
@@ -19,6 +20,10 @@ export const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers,
+  }),
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
   }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,

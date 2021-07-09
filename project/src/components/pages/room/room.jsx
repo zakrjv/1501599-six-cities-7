@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Header from '../../elements-page/header/header';
@@ -8,11 +8,13 @@ import ReviewList from '../../elements-page/review/review-list/review-list';
 import Map from '../../elements-page/map/map';
 import CardList from '../../elements-page/offers/card-list/card-list';
 import placeCardProp from '../../../props/place-card.prop';
+import {fetchReviewsList} from '../../../store/api-actions';
 
 const OFFERS_COUNT = 3;
 
-function Room({offer, offers}) {
+function Room({offer, offers, loadReviews}) {
   const {
+    id,
     images,
     isPremium,
     title,
@@ -34,6 +36,10 @@ function Room({offer, offers}) {
   } = host;
 
   const [activeOfferId, setActiveOfferId] = useState(0);
+
+  useEffect(() => {
+    loadReviews(id);
+  }, [id, loadReviews]);
 
   return (
     <div className="page">
@@ -165,11 +171,16 @@ function Room({offer, offers}) {
 Room.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp),
   offer: placeCardProp,
+  loadReviews: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers.slice(0, OFFERS_COUNT),
 });
 
+const mapDispatchToProps = {
+  loadReviews: fetchReviewsList,
+};
+
 // export default Room;
-export default connect(mapStateToProps)(Room);
+export default connect(mapStateToProps, mapDispatchToProps)(Room);
