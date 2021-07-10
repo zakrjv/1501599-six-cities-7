@@ -2,13 +2,14 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Header from '../../elements-page/header/header';
-import {selectedRating} from '../../../const';
+import {selectedRating, typeFavoriteButton} from '../../../const';
 import ReviewForm from '../../elements-page/review/review-form/review-form';
 import ReviewList from '../../elements-page/review/review-list/review-list';
 import Map from '../../elements-page/map/map';
 import CardList from '../../elements-page/offers/card-list/card-list';
 import placeCardProp from '../../../props/place-card.prop';
 import {fetchReviewsList} from '../../../store/api-actions';
+import ButtonFavorite from '../../elements-page/button-favorite/button-favorite';
 
 const OFFERS_COUNT = 3;
 
@@ -63,25 +64,10 @@ function Room({offer, offers, loadReviews}) {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button
-                  className={
-                    isFavorites
-                      ? 'property__bookmark-button property__bookmark-button--active button'
-                      : 'property__bookmark-button button'
-                  }
-                  type="button"
-                >
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"/>
-                  </svg>
-                  <span className="visually-hidden">
-                    {
-                      isFavorites
-                        ? 'In bookmarks'
-                        : 'To bookmarks'
-                    }
-                  </span>
-                </button>
+                <ButtonFavorite
+                  isFavorites={isFavorites}
+                  typeButton={typeFavoriteButton.ROOM}
+                />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">

@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import clsx from 'clsx';
 import placeCardProp from '../../../../props/place-card.prop';
 import {selectedRating, Page, AppRoute} from '../../../../const';
+import ButtonFavorite from '../../button-favorite/button-favorite';
 
 function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
   const {
@@ -16,25 +17,6 @@ function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
     isFavorites,
     rating,
   } = offer;
-
-  function renderButtonFavorites() {
-    let className = 'place-card__bookmark-button button';
-    let text = 'To bookmarks';
-
-    if (isFavorites) {
-      className += ' place-card__bookmark-button--active';
-      text = 'In bookmarks';
-    }
-
-    return (
-      <button className={className} type="button">
-        <svg className="place-card__bookmark-icon" width="18" height="19">
-          <use xlinkHref="#icon-bookmark"/>
-        </svg>
-        <span className="visually-hidden">{text}</span>
-      </button>
-    );
-  }
 
   return (
     <article
@@ -77,7 +59,7 @@ function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          {renderButtonFavorites()}
+          <ButtonFavorite isFavorites={isFavorites}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

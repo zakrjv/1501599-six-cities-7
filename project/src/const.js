@@ -44,6 +44,11 @@ const Options = {
   TOP_RATED_FIRST: 'Top rated first',
 };
 
+const typeFavoriteButton = {
+  ROOM: 'property',
+  MAIN: 'place-card',
+};
+
 const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam','Hamburg', 'Dusseldorf'];
 
 export {
@@ -54,5 +59,6 @@ export {
   CITIES,
   Options,
   AuthorizationStatus,
-  APIRoute
+  APIRoute,
+  typeFavoriteButton
 };
