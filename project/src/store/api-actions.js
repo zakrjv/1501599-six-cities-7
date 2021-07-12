@@ -12,6 +12,13 @@ const fetchReviewsList = (id) => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(ActionCreator.loadReviews(data.slice().map((review) => adaptReviewToClient(review)))))
 );
 
+const postReview = (id, {comment, rating}) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.REVIEWS}/${id}`, {comment, rating})
+    .then(({data}) => dispatch(ActionCreator.loadReviews(data.slice().map((review) => adaptReviewToClient(review)))))
+    .catch(() => {
+    })
+);
+
 const fetchNearbyOffers = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.OFFERS}/${id}${APIRoute.NEARBY_OFFERS}`)
     .then(({data}) => dispatch(ActionCreator.loadNearbyOffers(data.slice().map((offer) => adaptOffersToClient(offer)))))
@@ -48,5 +55,6 @@ export {
   login,
   logout,
   fetchReviewsList,
-  fetchNearbyOffers
+  fetchNearbyOffers,
+  postReview
 };

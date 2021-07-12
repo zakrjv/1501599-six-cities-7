@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import RatingStars from '../rating-stars/rating-stars';
+import {postReview} from '../../../../store/api-actions';
 
 const commentSetting = {
   MIN_LENGTH: 50,
   MAX_LENGTH: 300,
 }
 
-function ReviewForm() {
+function ReviewForm({offerId, sendComment}) {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
@@ -23,10 +26,21 @@ function ReviewForm() {
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
+    setIsDisabled(true);
+
+    sendComment(offerId, {comment, rating});
+
+    setRating(0);
+    setComment('');
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleFormSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <RatingStars onChange={setRating} rating={rating}/>
       <textarea
@@ -46,7 +60,6 @@ function ReviewForm() {
           className="reviews__submit form__submit button"
           type="submit"
           disabled={isDisabled}
-          onClick={handleFormSubmit}
         >
           Submit
         </button>
@@ -55,4 +68,17 @@ function ReviewForm() {
   );
 }
 
-export default ReviewForm;
+ReviewForm.propTypes = {
+  offerId: PropTypes.number.isRequired,
+  sendComment: PropTypes.func.isRequired,
+};
+
+
+const mapDispatchToProps = (dispatch) => ({
+  sendComment(offerId, commentData) {
+    dispatch(postReview(offerId, commentData));
+  },
+});
+
+// export default ReviewForm;
+export default connect(null, mapDispatchToProps)(ReviewForm);
