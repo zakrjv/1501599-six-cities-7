@@ -7,7 +7,7 @@ import {postReview} from '../../../../store/api-actions';
 const commentSetting = {
   MIN_LENGTH: 50,
   MAX_LENGTH: 300,
-}
+};
 
 function ReviewForm({offerId, sendComment}) {
   const [rating, setRating] = useState(0);
@@ -20,7 +20,7 @@ function ReviewForm({offerId, sendComment}) {
     setIsDisabled(
       comment.length < commentSetting.MIN_LENGTH
       || rating === 0
-      || comment.length > commentSetting.MAX_LENGTH
+      || comment.length > commentSetting.MAX_LENGTH,
     );
   };
 
