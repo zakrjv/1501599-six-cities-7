@@ -1,10 +1,10 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {AuthorizationStatus, typeFavoriteButton} from '../../../const';
 import clsx from 'clsx';
-import {connect} from 'react-redux';
 import {AppRoute} from '../../../const';
-import browserHistory from '../../../browser-history';
 
 const getClassName = (type, isFavorites) => (
   `${isFavorites ? `${type}__bookmark-button--active` : ''} ${type}__bookmark-button button`
@@ -15,9 +15,11 @@ const getButtonText = (isFavorites) => (
 );
 
 function ButtonFavorite({isFavorites, typeButton = typeFavoriteButton.MAIN, authorizationStatus}) {
+  const history = useHistory();
+
   const handleClick = () => {
     if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
-      return browserHistory.push(AppRoute.LOGIN);
+      return history.push(AppRoute.LOGIN);
     }
   };
 

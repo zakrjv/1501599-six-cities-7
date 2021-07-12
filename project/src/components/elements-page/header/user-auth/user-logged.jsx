@@ -6,10 +6,6 @@ import {AppRoute} from '../../../../const';
 import {logout} from '../../../../store/api-actions';
 
 function UserLogged({email, avatarUrl, onClick}) {
-  const handleClick = () => {
-    onClick(logout);
-  };
-
   return (
     <ul className="header__nav-list">
       <li className="header__nav-item user">
@@ -24,7 +20,7 @@ function UserLogged({email, avatarUrl, onClick}) {
         <Link to={AppRoute.ROOT} className="header__nav-link">
           <span
             className="header__signout"
-            onClick={handleClick}
+            onClick={onClick}
           >
             Sign out
           </span>
