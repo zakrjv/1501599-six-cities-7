@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Header from '../../elements-page/header/header';
-import {selectedRating, typeFavoriteButton} from '../../../const';
+import {AuthorizationStatus, selectedRating, typeFavoriteButton} from '../../../const';
 import ReviewForm from '../../elements-page/review/review-form/review-form';
 import ReviewList from '../../elements-page/review/review-list/review-list';
 import Map from '../../elements-page/map/map';
@@ -11,7 +11,7 @@ import placeCardProp from '../../../props/place-card.prop';
 import {fetchReviewsList, fetchNearbyOffers} from '../../../store/api-actions';
 import ButtonFavorite from '../../elements-page/button-favorite/button-favorite';
 
-function Room({offer, loadReviews, loadOffersNearby, offersNearby}) {
+function Room({offer, loadReviews, loadOffersNearby, offersNearby, authorizationStatus}) {
   const {
     id,
     images,
@@ -123,7 +123,8 @@ function Room({offer, loadReviews, loadOffersNearby, offersNearby}) {
               <section className="property__reviews reviews">
 
                 <ReviewList/>
-                <ReviewForm/>
+                {/*<ReviewForm/>*/}
+                {authorizationStatus === AuthorizationStatus.AUTH ? <ReviewForm /> : ''}
               </section>
             </div>
           </div>
@@ -158,10 +159,12 @@ Room.propTypes = {
   offer: placeCardProp,
   loadReviews: PropTypes.func.isRequired,
   loadOffersNearby: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offersNearby: state.offersNearby,
+  authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = {
