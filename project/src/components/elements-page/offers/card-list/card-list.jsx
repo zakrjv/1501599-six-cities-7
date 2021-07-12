@@ -50,10 +50,6 @@ CardList.propTypes = {
   onMouseLeave: PropTypes.func.isRequired,
 };
 
-// const mapStateToProps = (state) => ({
-//   offers: sortOffers(filtersOffersByCity(state.offers, state.currentCity), state.currentOption),
-// });
-
 const mapStateToProps = (state, props) => {
   let offers;
   switch (props.currentPage) {

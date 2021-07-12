@@ -62,11 +62,6 @@ Map.propTypes = {
   currentPage: PropTypes.string.isRequired,
 };
 
-// const mapStateToProps = (state) => ({
-//   offers: filtersOffersByCity(state.offers, state.currentCity),
-//   cities: state.cities.find((city) => city.title === state.currentCity),
-// });
-
 const mapStateToProps = (state, props) => {
   let offers;
   switch (props.currentPage) {

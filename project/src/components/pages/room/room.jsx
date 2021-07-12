@@ -123,7 +123,6 @@ function Room({offer, loadReviews, loadOffersNearby, offersNearby, authorization
               <section className="property__reviews reviews">
 
                 <ReviewList/>
-                {/*<ReviewForm/>*/}
                 {authorizationStatus === AuthorizationStatus.AUTH ? <ReviewForm /> : ''}
               </section>
             </div>
