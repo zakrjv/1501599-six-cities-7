@@ -32,6 +32,7 @@ function Main({offers, currentCity}) {
               <CardList
                 currentPage='main'
                 hoverOnCard={(offerId) => setActiveOfferId(offerId)}
+                onMouseLeave={() => setActiveOfferId(0)}
               />
             </section>
             <div className="cities__right-section">

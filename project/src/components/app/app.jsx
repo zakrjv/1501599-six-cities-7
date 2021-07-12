@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import Main from '../pages/main/main';
 import Favorites from '../pages/favorites /favorites';
 import NotFound from '../pages/not-found /not-found';
@@ -11,6 +11,8 @@ import LoadingScreen from '../pages/loading-screen/loading-screen';
 import {AppRoute} from '../../const';
 import placeCardProp from '../../props/place-card.prop';
 import {isCheckedAuth} from '../../utils';
+import PrivateRoute from '../private-route/private-route';
+import browserHistory from '../../browser-history';
 
 function App({offers, authorizationStatus, isDataLoaded}) {
 
@@ -21,15 +23,16 @@ function App({offers, authorizationStatus, isDataLoaded}) {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <Main/>
+          <Main />
         </Route>
 
-        <Route exact path={AppRoute.FAVORITES}>
-          <Favorites/>
-        </Route>
+        <PrivateRoute
+          exact path={AppRoute.FAVORITES}
+          render={() => <Favorites />}
+        />
 
         {offers.map((offer) => (
           <Route exact path={`${AppRoute.OFFER}/${offer.id}`} key={offer.id}>
@@ -41,11 +44,11 @@ function App({offers, authorizationStatus, isDataLoaded}) {
         ))}
 
         <Route exact path={AppRoute.LOGIN}>
-          <SignIn/>
+          <SignIn />
         </Route>
 
         <Route>
-          <NotFound/>
+          <NotFound />
         </Route>
 
       </Switch>

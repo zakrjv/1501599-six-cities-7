@@ -40,7 +40,7 @@ function ReviewList({reviews}) {
 }
 
 ReviewList.propTypes = {
-  reviews: PropTypes.arrayOf(reviewProp),
+  reviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
 const mapStateToProps = (state) => ({
