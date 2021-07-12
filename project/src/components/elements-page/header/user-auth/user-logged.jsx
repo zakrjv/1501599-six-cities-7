@@ -17,11 +17,12 @@ function UserLogged({email, avatarUrl, onClick}) {
         </Link>
       </li>
       <li className="header__nav-item">
-        <Link to={AppRoute.ROOT} className="header__nav-link">
-          <span
-            className="header__signout"
-            onClick={onClick}
-          >
+        <Link
+          to={AppRoute.ROOT}
+          className="header__nav-link"
+          onClick={onClick}
+        >
+          <span className="header__signout">
             Sign out
           </span>
         </Link>
