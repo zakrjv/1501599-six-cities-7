@@ -1,12 +1,28 @@
 import React, {useState} from 'react';
 import RatingStars from '../rating-stars/rating-stars';
 
+const commentSetting = {
+  MIN_LENGTH: 50,
+  MAX_LENGTH: 300,
+}
+
 function ReviewForm() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleCommentChange = (evt) => {
     setComment(evt.target.value);
+
+    setIsDisabled(
+      comment.length < commentSetting.MIN_LENGTH
+      || rating === 0
+      || comment.length > commentSetting.MAX_LENGTH
+    );
+  };
+
+  const handleFormSubmit = (evt) => {
+    evt.preventDefault();
   };
 
   return (
@@ -26,7 +42,14 @@ function ReviewForm() {
           To submit review please make sure to set <span className="reviews__star">rating</span> and
           describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={isDisabled}
+          onClick={handleFormSubmit}
+        >
+          Submit
+        </button>
       </div>
     </form>
   );
