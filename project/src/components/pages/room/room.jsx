@@ -70,7 +70,7 @@ function Room({offer, loadReviews, loadOffersNearby, offersNearby, authorization
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: selectedRating[rating]}}/>
+                  <span style={{width: selectedRating[Math.round(rating)]}}/>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>

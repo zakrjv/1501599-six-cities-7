@@ -63,7 +63,7 @@ function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: selectedRating[rating]}}/>
+            <span style={{width: selectedRating[Math.round(rating)]}}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
