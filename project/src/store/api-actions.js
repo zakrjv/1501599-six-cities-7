@@ -4,18 +4,24 @@ import {adaptOffersToClient, adaptReviewToClient, adaptUserToClient} from '../ad
 
 const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
-    .then(({data}) => dispatch(ActionCreator.loadOffers(data.slice().map((offer)=> adaptOffersToClient(offer)))))
+    .then(({data}) => dispatch(ActionCreator.loadOffers(data.slice().map((offer) => adaptOffersToClient(offer)))))
 );
 
 const fetchReviewsList = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.REVIEWS}/${id}`)
-    .then(({data}) => dispatch(ActionCreator.loadReviews(data.slice().map((review)=> adaptReviewToClient(review)))))
+    .then(({data}) => dispatch(ActionCreator.loadReviews(data.slice().map((review) => adaptReviewToClient(review)))))
+);
+
+const fetchNearbyOffers = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.OFFERS}/${id}${APIRoute.NEARBY_OFFERS}`)
+    .then(({data}) => dispatch(ActionCreator.loadNearbyOffers(data.slice().map((offer) => adaptOffersToClient(offer)))))
 );
 
 const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
-    .catch(() => {})
+    .catch(() => {
+    })
 );
 
 const login = ({login: email, password}) => (dispatch, _getState, api) => (
@@ -41,5 +47,6 @@ export {
   checkAuth,
   login,
   logout,
-  fetchReviewsList
+  fetchReviewsList,
+  fetchNearbyOffers
 };

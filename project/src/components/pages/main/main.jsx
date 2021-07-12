@@ -40,6 +40,7 @@ function Main({offers, currentCity}) {
 
                 <Map
                   activeOfferId={activeOfferId}
+                  currentPage='main'
                 />
               </section>
             </div>

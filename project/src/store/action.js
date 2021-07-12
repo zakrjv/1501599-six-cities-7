@@ -1,11 +1,11 @@
 export const ActionType = {
   CHANGE_CITY: 'main/changeCity',
-  SET_OFFERS: 'main/setOffers',
   CHANGE_SORTING: 'main/changeSorting',
   REDIRECT_TO_ROUTE: 'main/redirectToRoute',
   LOAD_OFFERS: 'data/loadOffers',
   LOAD_REVIEWS: 'data/loadReviews',
   LOAD_USER_DATA: 'data/loadUserData',
+  LOAD_NEARBY_OFFERS: 'data/loadNearbyOffers',
   REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
   LOGOUT: 'user/logout',
 };
@@ -41,5 +41,9 @@ export const ActionCreator = {
   loadUserData: (userData) => ({
     type: ActionType.LOAD_USER_DATA,
     payload: userData,
+  }),
+  loadNearbyOffers: (offers) => ({
+    type: ActionType.LOAD_NEARBY_OFFERS,
+    payload: offers,
   }),
 };

@@ -4,7 +4,7 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../../hooks/useMap';
 import placeCardProp from '../../../props/place-card.prop';
-import {MapMarker} from '../../../const';
+import {MapMarker, Page} from '../../../const';
 import {connect} from 'react-redux';
 import {filtersOffersByCity} from '../../../utils';
 
@@ -20,7 +20,7 @@ const activeCustomIcon = leaflet.icon({
   iconAnchor: [15, 30],
 });
 
-function Map({offers, activeOfferId, cities}) {
+function Map({offers, activeOfferId, cities, currentPage}) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, cities.coordinates, cities.zoom);
 
@@ -43,7 +43,7 @@ function Map({offers, activeOfferId, cities}) {
     }
 
     return () => markersLayer.removeFrom(map);
-  }, [map, offers, activeOfferId]);
+  }, [map, offers, activeOfferId, currentPage]);
 
 
   return (
@@ -59,12 +59,35 @@ Map.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp).isRequired,
   activeOfferId: PropTypes.number.isRequired,
   cities: PropTypes.object.isRequired,
+  currentPage: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: filtersOffersByCity(state.offers, state.currentCity),
-  cities: state.cities.find((city) => city.title === state.currentCity),
-});
+// const mapStateToProps = (state) => ({
+//   offers: filtersOffersByCity(state.offers, state.currentCity),
+//   cities: state.cities.find((city) => city.title === state.currentCity),
+// });
+
+const mapStateToProps = (state, props) => {
+  let offers;
+  switch (props.currentPage) {
+    case Page.MAIN:
+      offers = filtersOffersByCity(state.offers, state.currentCity);
+      break;
+    case Page.OFFER:
+      offers = state.offersNearby;
+      break;
+    case Page.FAVORITES:
+      offers = state.offers;
+      break;
+    default:
+      break;
+  }
+
+  return {
+    offers,
+    cities: state.cities.find((city) => city.title === state.currentCity),
+  };
+};
 
 // export default Map;
 export default connect(mapStateToProps)(Map);

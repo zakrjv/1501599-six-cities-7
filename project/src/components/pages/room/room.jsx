@@ -8,12 +8,10 @@ import ReviewList from '../../elements-page/review/review-list/review-list';
 import Map from '../../elements-page/map/map';
 import CardList from '../../elements-page/offers/card-list/card-list';
 import placeCardProp from '../../../props/place-card.prop';
-import {fetchReviewsList} from '../../../store/api-actions';
+import {fetchReviewsList, fetchNearbyOffers} from '../../../store/api-actions';
 import ButtonFavorite from '../../elements-page/button-favorite/button-favorite';
 
-const OFFERS_COUNT = 3;
-
-function Room({offer, offers, loadReviews}) {
+function Room({offer, loadReviews, loadOffersNearby, offersNearby}) {
   const {
     id,
     images,
@@ -40,7 +38,8 @@ function Room({offer, offers, loadReviews}) {
 
   useEffect(() => {
     loadReviews(id);
-  }, [id, loadReviews]);
+    loadOffersNearby(id);
+  }, [id, loadReviews, loadOffersNearby]);
 
   return (
     <div className="page">
@@ -129,10 +128,10 @@ function Room({offer, offers, loadReviews}) {
             </div>
           </div>
           <section className="property__map map">
-
             <Map
-              offers={offers}
+              offers={offersNearby}
               activeOfferId={activeOfferId}
+              currentPage='offer'
             />
           </section>
         </section>
@@ -140,9 +139,8 @@ function Room({offer, offers, loadReviews}) {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-
               <CardList
-                offers={offers}
+                offers={offersNearby}
                 currentPage='offer'
                 hoverOnCard={(offerId) => setActiveOfferId(offerId)}
                 onMouseLeave={() => setActiveOfferId(0)}
@@ -156,17 +154,19 @@ function Room({offer, offers, loadReviews}) {
 }
 
 Room.propTypes = {
-  offers: PropTypes.arrayOf(placeCardProp),
+  offersNearby: PropTypes.arrayOf(placeCardProp),
   offer: placeCardProp,
   loadReviews: PropTypes.func.isRequired,
+  loadOffersNearby: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers.slice(0, OFFERS_COUNT),
+  offersNearby: state.offersNearby,
 });
 
 const mapDispatchToProps = {
   loadReviews: fetchReviewsList,
+  loadOffersNearby: fetchNearbyOffers,
 };
 
 // export default Room;
