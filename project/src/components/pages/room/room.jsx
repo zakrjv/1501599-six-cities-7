@@ -2,18 +2,16 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Header from '../../elements-page/header/header';
-import {selectedRating, typeFavoriteButton} from '../../../const';
+import {AuthorizationStatus, selectedRating, typeFavoriteButton} from '../../../const';
 import ReviewForm from '../../elements-page/review/review-form/review-form';
 import ReviewList from '../../elements-page/review/review-list/review-list';
 import Map from '../../elements-page/map/map';
 import CardList from '../../elements-page/offers/card-list/card-list';
 import placeCardProp from '../../../props/place-card.prop';
-import {fetchReviewsList} from '../../../store/api-actions';
+import {fetchReviewsList, fetchNearbyOffers} from '../../../store/api-actions';
 import ButtonFavorite from '../../elements-page/button-favorite/button-favorite';
 
-const OFFERS_COUNT = 3;
-
-function Room({offer, offers, loadReviews}) {
+function Room({offer, loadReviews, loadOffersNearby, offersNearby, authorizationStatus}) {
   const {
     id,
     images,
@@ -40,7 +38,8 @@ function Room({offer, offers, loadReviews}) {
 
   useEffect(() => {
     loadReviews(id);
-  }, [id, loadReviews]);
+    loadOffersNearby(id);
+  }, [id, loadReviews, loadOffersNearby]);
 
   return (
     <div className="page">
@@ -71,7 +70,7 @@ function Room({offer, offers, loadReviews}) {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: selectedRating[rating]}}/>
+                  <span style={{width: selectedRating[Math.round(rating)]}}/>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>
@@ -122,17 +121,16 @@ function Room({offer, offers, loadReviews}) {
                 </div>
               </div>
               <section className="property__reviews reviews">
-
                 <ReviewList/>
-                <ReviewForm/>
+                {authorizationStatus === AuthorizationStatus.AUTH ? <ReviewForm offerId={offer.id} /> : ''}
               </section>
             </div>
           </div>
           <section className="property__map map">
-
             <Map
-              offers={offers}
+              offers={offersNearby}
               activeOfferId={activeOfferId}
+              currentPage='offer'
             />
           </section>
         </section>
@@ -140,9 +138,8 @@ function Room({offer, offers, loadReviews}) {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-
               <CardList
-                offers={offers}
+                offers={offersNearby}
                 currentPage='offer'
                 hoverOnCard={(offerId) => setActiveOfferId(offerId)}
                 onMouseLeave={() => setActiveOfferId(0)}
@@ -156,17 +153,21 @@ function Room({offer, offers, loadReviews}) {
 }
 
 Room.propTypes = {
-  offers: PropTypes.arrayOf(placeCardProp),
+  offersNearby: PropTypes.arrayOf(placeCardProp),
   offer: placeCardProp,
   loadReviews: PropTypes.func.isRequired,
+  loadOffersNearby: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers.slice(0, OFFERS_COUNT),
+  offersNearby: state.offersNearby,
+  authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = {
   loadReviews: fetchReviewsList,
+  loadOffersNearby: fetchNearbyOffers,
 };
 
 // export default Room;

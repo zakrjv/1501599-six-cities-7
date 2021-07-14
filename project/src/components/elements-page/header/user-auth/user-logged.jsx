@@ -32,8 +32,8 @@ function UserLogged({email, avatarUrl, onClick}) {
 }
 
 UserLogged.propTypes = {
-  email: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
+  email: PropTypes.string,
+  avatarUrl: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };
 

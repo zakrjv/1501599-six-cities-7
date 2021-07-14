@@ -5,6 +5,7 @@ import {cities} from '../mocks/cities';
 const initialState = {
   currentCity: CITIES[0],
   offers: [],
+  offersNearby: [],
   reviews: [],
   cities: cities,
   currentOption: Options.POPULAR,
@@ -51,6 +52,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         userData: action.payload,
+      };
+    case ActionType.LOAD_NEARBY_OFFERS:
+      return {
+        ...state,
+        offersNearby: action.payload,
       };
     default:
       return state;
