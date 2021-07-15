@@ -1,4 +1,6 @@
-export const ActionType = {
+import {createAction} from '@reduxjs/toolkit';
+
+const ActionType = {
   CHANGE_CITY: 'main/changeCity',
   CHANGE_SORTING: 'main/changeSorting',
   REDIRECT_TO_ROUTE: 'main/redirectToRoute',
@@ -10,51 +12,43 @@ export const ActionType = {
   LOGOUT: 'user/logout',
 };
 
-const changeCity = (city) => ({
-  type: ActionType.CHANGE_CITY,
+
+const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
   payload: city,
-});
+}));
 
-const changeSorting = (option) => ({
-  type: ActionType.CHANGE_SORTING,
+const changeSorting = createAction(ActionType.CHANGE_SORTING, (option) => ({
   payload: option,
-});
+}));
 
-const loadOffers = (offers) => ({
-  type: ActionType.LOAD_OFFERS,
+const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => ({
   payload: offers,
-});
+}));
 
-const loadReviews = (reviews) => ({
-  type: ActionType.LOAD_REVIEWS,
+const loadReviews = createAction(ActionType.LOAD_REVIEWS, (reviews) => ({
   payload: reviews,
-});
+}));
 
-const requireAuthorization = (status) => ({
-  type: ActionType.REQUIRED_AUTHORIZATION,
+const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status) => ({
   payload: status,
-});
+}));
 
-const logoutProfile = () => ({
-  type: ActionType.LOGOUT,
-});
+const logoutProfile = createAction(ActionType.LOGOUT);
 
-const redirectToRoute = (url) => ({
-  type: ActionType.REDIRECT_TO_ROUTE,
+const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
   payload: url,
-});
+}));
 
-const loadUserData = (userData) => ({
-  type: ActionType.LOAD_USER_DATA,
+const loadUserData = createAction(ActionType.LOAD_USER_DATA, (userData) => ({
   payload: userData,
-});
+}));
 
-const loadNearbyOffers = (offers) => ({
-  type: ActionType.LOAD_NEARBY_OFFERS,
+const loadNearbyOffers = createAction(ActionType.LOAD_NEARBY_OFFERS, (offers) => ({
   payload: offers,
-});
+}));
 
 export {
+  ActionType,
   changeCity,
   changeSorting,
   loadOffers,
