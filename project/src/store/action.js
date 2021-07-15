@@ -10,40 +10,58 @@ export const ActionType = {
   LOGOUT: 'user/logout',
 };
 
-export const ActionCreator = {
-  changeCity: (city) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: city,
-  }),
-  changeSorting: (option) => ({
-    type: ActionType.CHANGE_SORTING,
-    payload: option,
-  }),
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: offers,
-  }),
-  loadReviews: (reviews) => ({
-    type: ActionType.LOAD_REVIEWS,
-    payload: reviews,
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
-  logout: () => ({
-    type: ActionType.LOGOUT,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
-  loadUserData: (userData) => ({
-    type: ActionType.LOAD_USER_DATA,
-    payload: userData,
-  }),
-  loadNearbyOffers: (offers) => ({
-    type: ActionType.LOAD_NEARBY_OFFERS,
-    payload: offers,
-  }),
+const changeCity = (city) => ({
+  type: ActionType.CHANGE_CITY,
+  payload: city,
+});
+
+const changeSorting = (option) => ({
+  type: ActionType.CHANGE_SORTING,
+  payload: option,
+});
+
+const loadOffers = (offers) => ({
+  type: ActionType.LOAD_OFFERS,
+  payload: offers,
+});
+
+const loadReviews = (reviews) => ({
+  type: ActionType.LOAD_REVIEWS,
+  payload: reviews,
+});
+
+const requireAuthorization = (status) => ({
+  type: ActionType.REQUIRED_AUTHORIZATION,
+  payload: status,
+});
+
+const logoutProfile = () => ({
+  type: ActionType.LOGOUT,
+});
+
+const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
+});
+
+const loadUserData = (userData) => ({
+  type: ActionType.LOAD_USER_DATA,
+  payload: userData,
+});
+
+const loadNearbyOffers = (offers) => ({
+  type: ActionType.LOAD_NEARBY_OFFERS,
+  payload: offers,
+});
+
+export {
+  changeCity,
+  changeSorting,
+  loadOffers,
+  loadReviews,
+  requireAuthorization,
+  logoutProfile,
+  redirectToRoute,
+  loadUserData,
+  loadNearbyOffers
 };

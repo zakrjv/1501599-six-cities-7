@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Options} from '../../../../const';
 import PropTypes from 'prop-types';
-import {ActionCreator} from '../../../../store/action';
+import {changeSorting} from '../../../../store/action';
 
-function SortingList({isOpened, optionsRef, currentOption, changeSorting}) {
+function SortingList({isOpened, optionsRef, currentOption, onChangeSorting}) {
   return (
     <ul
       className={`places__options places__options--custom ${isOpened && 'places__options--opened'}`}
@@ -16,7 +16,7 @@ function SortingList({isOpened, optionsRef, currentOption, changeSorting}) {
             key={option}
             className={`places__option ${option === currentOption && 'places__option--active'}`}
             tabIndex="0"
-            onClick={() => changeSorting(option)}
+            onClick={() => onChangeSorting(option)}
           >
             {option}
           </li>
@@ -30,7 +30,7 @@ SortingList.propTypes = {
   isOpened: PropTypes.bool.isRequired,
   optionsRef: PropTypes.object.isRequired,
   currentOption: PropTypes.string.isRequired,
-  changeSorting: PropTypes.func.isRequired,
+  onChangeSorting: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -38,8 +38,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeSorting(option) {
-    dispatch(ActionCreator.changeSorting(option));
+  onChangeSorting(option) {
+    dispatch(changeSorting(option));
   },
 });
 

@@ -122,7 +122,7 @@ function Room({offer, loadReviews, loadOffersNearby, offersNearby, authorization
               </div>
               <section className="property__reviews reviews">
                 <ReviewList/>
-                {authorizationStatus === AuthorizationStatus.AUTH ? <ReviewForm offerId={offer.id} /> : ''}
+                {authorizationStatus === AuthorizationStatus.AUTH ? <ReviewForm offerId={offer.id} /> : null}
               </section>
             </div>
           </div>

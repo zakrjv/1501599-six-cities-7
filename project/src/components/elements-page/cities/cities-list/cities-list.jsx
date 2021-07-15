@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {CITIES} from '../../../../const';
-import {ActionCreator} from '../../../../store/action';
+import {changeCity} from '../../../../store/action';
 import City from '../city/city';
 
-function CitiesList({currentCity, changeCity}) {
+function CitiesList({currentCity, onChangeCity}) {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
@@ -14,7 +14,7 @@ function CitiesList({currentCity, changeCity}) {
             key={city}
             city={city}
             isActive={currentCity === city}
-            onClick={() => changeCity(city)}
+            onClick={() => onChangeCity(city)}
           />
         ))}
       </ul>
@@ -24,7 +24,7 @@ function CitiesList({currentCity, changeCity}) {
 
 CitiesList.propTypes = {
   currentCity: PropTypes.string.isRequired,
-  changeCity: PropTypes.func.isRequired,
+  onChangeCity: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -32,8 +32,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCity(city) {
-    dispatch(ActionCreator.changeCity(city));
+  onChangeCity(city) {
+    dispatch(changeCity(city));
   },
 });
 

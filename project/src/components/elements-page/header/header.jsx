@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Logo from '../logo/logo';
 import UserNotLogged from './user-not-auth/user-not-logged';
-import UserLogged from './user-auth/user-logged';
+import UserLogged from './user-logged/user-logged';
 import {AuthorizationStatus} from '../../../const';
 
 function Header({authorizationStatus}) {
