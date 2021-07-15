@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Header from '../../elements-page/header/header';
 import {AuthorizationStatus, selectedRating, typeFavoriteButton} from '../../../const';
@@ -13,17 +13,6 @@ import {getOffersNearby} from '../../../store/reducer/data/selectors';
 import {getAuthorizationStatus} from '../../../store/reducer/user/selectors';
 
 function Room({offer}) {
-  const offersNearby = useSelector(getOffersNearby);
-  const authorizationStatus = useSelector(getAuthorizationStatus);
-  const dispatch = useDispatch();
-
-  const loadReviews = (offerId) => {
-    dispatch(fetchReviewsList(offerId));
-  };
-  const loadOffersNearby = (offerId) => {
-    dispatch(fetchNearbyOffers(offerId));
-  };
-
   const {
     id,
     images,
@@ -37,20 +26,32 @@ function Room({offer}) {
     maxAdults,
     price,
     goods,
-    host,
+    host: {
+      avatarUrl,
+      isPro,
+      name,
+    },
   } = offer;
 
-  const {
-    avatarUrl,
-    isPro,
-    name,
-  } = host;
+  const offersNearby = useSelector(getOffersNearby);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const dispatch = useDispatch();
+
+  const loadReviews = useCallback(
+    () => dispatch(fetchReviewsList(id)),
+    [dispatch, id],
+  );
+
+  const loadOffersNearby = useCallback(
+    () => dispatch(fetchNearbyOffers(id)),
+    [dispatch, id],
+  );
 
   const [activeOfferId, setActiveOfferId] = useState(0);
 
   useEffect(() => {
-    loadReviews(id);
-    loadOffersNearby(id);
+    loadReviews();
+    loadOffersNearby();
   }, [id, loadReviews, loadOffersNearby]);
 
   return (
@@ -133,7 +134,7 @@ function Room({offer}) {
               </div>
               <section className="property__reviews reviews">
                 <ReviewList/>
-                {authorizationStatus === AuthorizationStatus.AUTH ? <ReviewForm offerId={offer.id}/> : null}
+                {authorizationStatus === AuthorizationStatus.AUTH ? <ReviewForm offerId={id}/> : null}
               </section>
             </div>
           </div>

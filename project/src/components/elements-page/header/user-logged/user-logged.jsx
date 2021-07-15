@@ -8,9 +8,7 @@ import {getUserData} from '../../../../store/reducer/data/selectors';
 function UserLogged() {
   const userData = useSelector(getUserData);
   const dispatch = useDispatch();
-  const onClick = () => {
-    dispatch(logout);
-  };
+  const onClick = () => dispatch(logout());
 
   return (
     <ul className="header__nav-list">

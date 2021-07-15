@@ -1,9 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import {useSelector} from 'react-redux';
 import SortingList from '../sorting-list/sorting-list';
+import {getCurrentOption} from '../../../../store/reducer/main/selectors';
 
-function SortingForm({currentOption}) {
+function SortingForm() {
+  const currentOption = useSelector(getCurrentOption);
   const [isOpened, setIsOpened] = useState(false);
   const optionsRef = useRef(null);
 
@@ -44,13 +45,4 @@ function SortingForm({currentOption}) {
   );
 }
 
-SortingForm.propTypes = {
-  currentOption: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = ({MAIN}) => ({
-  currentOption: MAIN.currentOption,
-});
-
-// export default SortingForm;
-export default connect(mapStateToProps)(SortingForm);
+export default SortingForm;
