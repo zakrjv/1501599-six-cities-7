@@ -62,17 +62,17 @@ Map.propTypes = {
   currentPage: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = ({DATA, MAIN}, props) => {
   let offers;
   switch (props.currentPage) {
     case Page.MAIN:
-      offers = filtersOffersByCity(state.offers, state.currentCity);
+      offers = filtersOffersByCity(DATA.offers, MAIN.currentCity);
       break;
     case Page.OFFER:
-      offers = state.offersNearby;
+      offers = DATA.offersNearby;
       break;
     case Page.FAVORITES:
-      offers = state.offers;
+      offers = DATA.offers;
       break;
     default:
       break;
@@ -80,7 +80,7 @@ const mapStateToProps = (state, props) => {
 
   return {
     offers,
-    cities: state.cities.find((city) => city.title === state.currentCity),
+    cities: DATA.cities.find((city) => city.title === MAIN.currentCity),
   };
 };
 

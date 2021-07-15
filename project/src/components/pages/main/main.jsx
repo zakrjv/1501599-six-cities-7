@@ -56,9 +56,9 @@ Main.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp),
 };
 
-const mapStateToProps = (state) => ({
-  currentCity: state.currentCity,
-  offers: filtersOffersByCity(state.offers, state.currentCity),
+const mapStateToProps = ({DATA, MAIN}) => ({
+  currentCity: MAIN.currentCity,
+  offers: filtersOffersByCity(DATA.offers, MAIN.currentCity),
 });
 
 // export default Main;

@@ -63,8 +63,8 @@ Favorites.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp),
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
+const mapStateToProps = ({DATA}) => ({
+  offers: DATA.offers,
 });
 
 // export default Favorites;

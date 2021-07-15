@@ -43,8 +43,8 @@ ReviewList.propTypes = {
   reviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  reviews: getSortedReviews(state.reviews),
+const mapStateToProps = ({DATA}) => ({
+  reviews: getSortedReviews(DATA.reviews),
 });
 
 // export default ReviewList;

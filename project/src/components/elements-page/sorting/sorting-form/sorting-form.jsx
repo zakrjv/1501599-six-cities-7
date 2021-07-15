@@ -48,8 +48,8 @@ SortingForm.propTypes = {
   currentOption: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentOption: state.currentOption,
+const mapStateToProps = ({MAIN}) => ({
+  currentOption: MAIN.currentOption,
 });
 
 // export default SortingForm;

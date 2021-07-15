@@ -50,17 +50,17 @@ CardList.propTypes = {
   onMouseLeave: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = ({DATA, MAIN}, props) => {
   let offers;
   switch (props.currentPage) {
     case Page.MAIN:
-      offers = sortOffers(filtersOffersByCity(state.offers, state.currentCity), state.currentOption);
+      offers = sortOffers(filtersOffersByCity(DATA.offers, MAIN.currentCity), MAIN.currentOption);
       break;
     case Page.OFFER:
-      offers = state.offersNearby;
+      offers = DATA.offersNearby;
       break;
     case Page.FAVORITES:
-      offers = state.offers;
+      offers = DATA.offers;
       break;
     default:
       break;

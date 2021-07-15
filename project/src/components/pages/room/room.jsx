@@ -160,9 +160,9 @@ Room.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offersNearby: state.offersNearby,
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({DATA, USER}) => ({
+  offersNearby: DATA.offersNearby,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = {

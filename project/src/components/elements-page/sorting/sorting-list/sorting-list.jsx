@@ -33,8 +33,8 @@ SortingList.propTypes = {
   onChangeSorting: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentOption: state.currentOption,
+const mapStateToProps = ({MAIN}) => ({
+  currentOption: MAIN.currentOption,
 });
 
 const mapDispatchToProps = (dispatch) => ({
