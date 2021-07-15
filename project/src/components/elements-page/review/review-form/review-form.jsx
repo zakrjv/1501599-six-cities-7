@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import RatingStars from '../rating-stars/rating-stars';
 import {postReview} from '../../../../store/api-actions';
 
@@ -9,7 +9,13 @@ const commentSetting = {
   MAX_LENGTH: 300,
 };
 
-function ReviewForm({offerId, sendComment}) {
+function ReviewForm({offerId}) {
+  const dispatch = useDispatch();
+
+  const sendComment = (id, commentData) => {
+    dispatch(postReview(id, commentData));
+  };
+
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
@@ -70,15 +76,6 @@ function ReviewForm({offerId, sendComment}) {
 
 ReviewForm.propTypes = {
   offerId: PropTypes.number.isRequired,
-  sendComment: PropTypes.func.isRequired,
 };
 
-
-const mapDispatchToProps = (dispatch) => ({
-  sendComment(offerId, commentData) {
-    dispatch(postReview(offerId, commentData));
-  },
-});
-
-// export default ReviewForm;
-export default connect(null, mapDispatchToProps)(ReviewForm);
+export default ReviewForm;

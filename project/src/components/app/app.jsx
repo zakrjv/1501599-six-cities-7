@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import Main from '../pages/main/main';
 import Favorites from '../pages/favorites /favorites';
@@ -9,12 +8,16 @@ import Room from '../pages/room/room';
 import SignIn from '../pages/sign-in/sign-in';
 import LoadingScreen from '../pages/loading-screen/loading-screen';
 import {AppRoute} from '../../const';
-import placeCardProp from '../../props/place-card.prop';
 import {isCheckedAuth} from '../../utils';
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
+import {getAuthorizationStatus} from '../../store/reducer/user/selectors';
+import {getLoadedData, getOffers} from '../../store/reducer/data/selectors';
 
-function App({offers, authorizationStatus, isDataLoaded}) {
+function App() {
+  const offers = useSelector(getOffers);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const isDataLoaded = useSelector(getLoadedData);
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
@@ -56,17 +59,4 @@ function App({offers, authorizationStatus, isDataLoaded}) {
   );
 }
 
-App.propTypes = {
-  offers: PropTypes.arrayOf(placeCardProp),
-  authorizationStatus: PropTypes.string.isRequired,
-  isDataLoaded: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = ({DATA, USER}) => ({
-  offers: DATA.offers,
-  authorizationStatus: USER.authorizationStatus,
-  isDataLoaded: DATA.isDataLoaded,
-});
-
-// export default App;
-export default connect(mapStateToProps)(App);
+export default App;

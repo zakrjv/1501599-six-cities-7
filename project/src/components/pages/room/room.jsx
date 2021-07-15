@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Header from '../../elements-page/header/header';
 import {AuthorizationStatus, selectedRating, typeFavoriteButton} from '../../../const';
 import ReviewForm from '../../elements-page/review/review-form/review-form';
@@ -10,8 +9,21 @@ import CardList from '../../elements-page/offers/card-list/card-list';
 import placeCardProp from '../../../props/place-card.prop';
 import {fetchReviewsList, fetchNearbyOffers} from '../../../store/api-actions';
 import ButtonFavorite from '../../elements-page/button-favorite/button-favorite';
+import {getOffersNearby} from '../../../store/reducer/data/selectors';
+import {getAuthorizationStatus} from '../../../store/reducer/user/selectors';
 
-function Room({offer, loadReviews, loadOffersNearby, offersNearby, authorizationStatus}) {
+function Room({offer}) {
+  const offersNearby = useSelector(getOffersNearby);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const dispatch = useDispatch();
+
+  const loadReviews = (offerId) => {
+    dispatch(fetchReviewsList(offerId));
+  };
+  const loadOffersNearby = (offerId) => {
+    dispatch(fetchNearbyOffers(offerId));
+  };
+
   const {
     id,
     images,
@@ -44,7 +56,6 @@ function Room({offer, loadReviews, loadOffersNearby, offersNearby, authorization
   return (
     <div className="page">
       <Header/>
-
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -122,7 +133,7 @@ function Room({offer, loadReviews, loadOffersNearby, offersNearby, authorization
               </div>
               <section className="property__reviews reviews">
                 <ReviewList/>
-                {authorizationStatus === AuthorizationStatus.AUTH ? <ReviewForm offerId={offer.id} /> : null}
+                {authorizationStatus === AuthorizationStatus.AUTH ? <ReviewForm offerId={offer.id}/> : null}
               </section>
             </div>
           </div>
@@ -153,22 +164,7 @@ function Room({offer, loadReviews, loadOffersNearby, offersNearby, authorization
 }
 
 Room.propTypes = {
-  offersNearby: PropTypes.arrayOf(placeCardProp),
   offer: placeCardProp,
-  loadReviews: PropTypes.func.isRequired,
-  loadOffersNearby: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({DATA, USER}) => ({
-  offersNearby: DATA.offersNearby,
-  authorizationStatus: USER.authorizationStatus,
-});
-
-const mapDispatchToProps = {
-  loadReviews: fetchReviewsList,
-  loadOffersNearby: fetchNearbyOffers,
-};
-
-// export default Room;
-export default connect(mapStateToProps, mapDispatchToProps)(Room);
+export default Room;

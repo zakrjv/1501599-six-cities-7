@@ -1,19 +1,25 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../../../const';
 import {logout} from '../../../../store/api-actions';
+import {getUserData} from '../../../../store/reducer/data/selectors';
 
-function UserLogged({email, avatarUrl, onClick}) {
+function UserLogged() {
+  const userData = useSelector(getUserData);
+  const dispatch = useDispatch();
+  const onClick = () => {
+    dispatch(logout);
+  };
+
   return (
     <ul className="header__nav-list">
       <li className="header__nav-item user">
         <Link to={AppRoute.FAVORITES} className="header__nav-link header__nav-link--profile">
           <div className="header__avatar-wrapper user__avatar-wrapper">
-            <img src={avatarUrl} alt="user"/>
+            <img src={userData.avatarUrl} alt="user"/>
           </div>
-          <span className="header__user-name user__name">{email}</span>
+          <span className="header__user-name user__name">{userData.email}</span>
         </Link>
       </li>
       <li className="header__nav-item">
@@ -31,20 +37,4 @@ function UserLogged({email, avatarUrl, onClick}) {
   );
 }
 
-UserLogged.propTypes = {
-  email: PropTypes.string,
-  avatarUrl: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ({DATA}) => ({
-  email: DATA.userData.email,
-  avatarUrl: DATA.userData.avatarUrl,
-});
-
-const mapDispatchToProps = {
-  onClick: logout,
-};
-
-// export default UserLogged;
-export default connect(mapStateToProps, mapDispatchToProps)(UserLogged);
+export default UserLogged;

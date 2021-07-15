@@ -1,13 +1,18 @@
 import React, {useRef} from 'react';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import {useDispatch} from 'react-redux';
 import Header from '../../elements-page/header/header';
 import {Link} from 'react-router-dom';
 import {login} from '../../../store/api-actions';
 
-function SignIn({onSubmit}) {
+function SignIn() {
+  const dispatch = useDispatch();
+
   const loginRef = useRef(null);
   const passwordRef = useRef(null);
+
+  const onSubmit = (authData) => {
+    dispatch(login(authData));
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -70,15 +75,4 @@ function SignIn({onSubmit}) {
   );
 }
 
-SignIn.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(authData) {
-    dispatch(login(authData));
-  },
-});
-
-// export default SignIn;
-export default connect(null, mapDispatchToProps)(SignIn);
+export default SignIn;
