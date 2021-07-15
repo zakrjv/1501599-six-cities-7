@@ -1,28 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
+import {configureStore} from '@reduxjs/toolkit';
 import {createApi} from './services/api';
 import {Provider} from 'react-redux';
 import App from './components/app/app';
 import rootReducer from './store/reducer/root-reducer';
-import {composeWithDevTools} from 'redux-devtools-extension';
 import {requireAuthorization} from './store/action';
 import {checkAuth, fetchOffersList} from './store/api-actions';
 import {AuthorizationStatus} from './const';
 import {redirect} from './store/middlewares/redirect';
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(
-    applyMiddleware(thunk.withExtraArgument(
-      createApi(
-        () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
-      ),
-    )),
-    applyMiddleware(redirect),
-  ),
-);
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: createApi(
+          () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
+        ),
+      },
+    }).concat(redirect),
+});
 
 store.dispatch(checkAuth());
 store.dispatch(fetchOffersList());
