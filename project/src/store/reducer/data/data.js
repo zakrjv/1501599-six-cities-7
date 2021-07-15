@@ -1,4 +1,5 @@
-import {ActionType} from '../../action';
+import {createReducer} from '@reduxjs/toolkit';
+import {loadOffers, loadReviews, loadUserData, loadNearbyOffers} from '../../action';
 import {cities} from '../../../mocks/cities';
 
 const initialState = {
@@ -10,35 +11,24 @@ const initialState = {
   isDataLoaded: false,
 };
 
-const data = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.LOAD_OFFERS:
-      return {
-        ...state,
-        offers: action.payload,
-        isDataLoaded: true,
-      };
-    case ActionType.LOAD_REVIEWS:
-      return {
-        ...state,
-        reviews: action.payload,
-        isDataLoaded: true,
-      };
-    case ActionType.LOAD_USER_DATA:
-      return {
-        ...state,
-        userData: action.payload,
-        isDataLoaded: true,
-      };
-    case ActionType.LOAD_NEARBY_OFFERS:
-      return {
-        ...state,
-        offersNearby: action.payload,
-        isDataLoaded: true,
-      };
-    default:
-      return state;
-  }
-};
+const data = createReducer(initialState, (builder) => {
+  builder
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(loadUserData, (state, action) => {
+      state.userData = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(loadNearbyOffers, (state, action) => {
+      state.offersNearby = action.payload;
+      state.isDataLoaded = true;
+    });
+});
 
 export {data};

@@ -1,4 +1,5 @@
-import {ActionType} from '../../action';
+import {createReducer} from '@reduxjs/toolkit';
+import {changeCity, changeSorting} from '../../action';
 import {CITIES, Options} from '../../../const';
 
 const initialState = {
@@ -6,21 +7,14 @@ const initialState = {
   currentOption: Options.POPULAR,
 };
 
-const main = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.CHANGE_CITY:
-      return {
-        ...state,
-        currentCity: action.payload,
-      };
-    case ActionType.CHANGE_SORTING:
-      return {
-        ...state,
-        currentOption: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+const main = createReducer(initialState, (builder) => {
+  builder
+    .addCase(changeCity, (state, action) => {
+      state.currentCity = action.payload;
+    })
+    .addCase(changeSorting, (state, action) => {
+      state.currentOption = action.payload;
+    });
+});
 
 export {main};

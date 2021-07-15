@@ -37,9 +37,9 @@ UserLogged.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  email: state.userData.email,
-  avatarUrl: state.userData.avatarUrl,
+const mapStateToProps = ({DATA}) => ({
+  email: DATA.userData.email,
+  avatarUrl: DATA.userData.avatarUrl,
 });
 
 const mapDispatchToProps = {
