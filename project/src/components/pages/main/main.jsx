@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import Header from '../../elements-page/header/header';
-import placeCardProp from '../../../props/place-card.prop';
 import CardList from '../../elements-page/offers/card-list/card-list';
 import Map from '../../elements-page/map/map';
 import CitiesList from '../../elements-page/cities/cities-list/cities-list';
 import SortingForm from '../../elements-page/sorting/sorting-form/sorting-form';
 import {filtersOffersByCity} from '../../../utils';
+import {getOffers} from '../../../store/reducer/data/selectors';
+import {getCurrentCity} from '../../../store/reducer/main/selectors';
 
-function Main({offers, currentCity}) {
+function Main() {
+  const currentCity = useSelector(getCurrentCity);
+  const offers = useSelector(getOffers);
+
+  const offersByCity = filtersOffersByCity(offers, currentCity);
   const [activeOfferId, setActiveOfferId] = useState(0);
 
   return (
@@ -26,7 +30,7 @@ function Main({offers, currentCity}) {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {currentCity}</b>
+              <b className="places__found">{offersByCity.length} places to stay in {currentCity}</b>
               <SortingForm/>
 
               <CardList
@@ -51,15 +55,4 @@ function Main({offers, currentCity}) {
   );
 }
 
-Main.propTypes = {
-  currentCity: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(placeCardProp),
-};
-
-const mapStateToProps = (state) => ({
-  currentCity: state.currentCity,
-  offers: filtersOffersByCity(state.offers, state.currentCity),
-});
-
-// export default Main;
-export default connect(mapStateToProps)(Main);
+export default Main;

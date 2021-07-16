@@ -1,4 +1,6 @@
-export const ActionType = {
+import {createAction} from '@reduxjs/toolkit';
+
+const ActionType = {
   CHANGE_CITY: 'main/changeCity',
   CHANGE_SORTING: 'main/changeSorting',
   REDIRECT_TO_ROUTE: 'main/redirectToRoute',
@@ -10,40 +12,50 @@ export const ActionType = {
   LOGOUT: 'user/logout',
 };
 
-export const ActionCreator = {
-  changeCity: (city) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: city,
-  }),
-  changeSorting: (option) => ({
-    type: ActionType.CHANGE_SORTING,
-    payload: option,
-  }),
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: offers,
-  }),
-  loadReviews: (reviews) => ({
-    type: ActionType.LOAD_REVIEWS,
-    payload: reviews,
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
-  logout: () => ({
-    type: ActionType.LOGOUT,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
-  loadUserData: (userData) => ({
-    type: ActionType.LOAD_USER_DATA,
-    payload: userData,
-  }),
-  loadNearbyOffers: (offers) => ({
-    type: ActionType.LOAD_NEARBY_OFFERS,
-    payload: offers,
-  }),
+
+const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
+  payload: city,
+}));
+
+const changeSorting = createAction(ActionType.CHANGE_SORTING, (option) => ({
+  payload: option,
+}));
+
+const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => ({
+  payload: offers,
+}));
+
+const loadReviews = createAction(ActionType.LOAD_REVIEWS, (reviews) => ({
+  payload: reviews,
+}));
+
+const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status) => ({
+  payload: status,
+}));
+
+const logoutProfile = createAction(ActionType.LOGOUT);
+
+const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
+  payload: url,
+}));
+
+const loadUserData = createAction(ActionType.LOAD_USER_DATA, (userData) => ({
+  payload: userData,
+}));
+
+const loadNearbyOffers = createAction(ActionType.LOAD_NEARBY_OFFERS, (offers) => ({
+  payload: offers,
+}));
+
+export {
+  ActionType,
+  changeCity,
+  changeSorting,
+  loadOffers,
+  loadReviews,
+  requireAuthorization,
+  logoutProfile,
+  redirectToRoute,
+  loadUserData,
+  loadNearbyOffers
 };

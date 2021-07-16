@@ -1,10 +1,11 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import {AuthorizationStatus, typeFavoriteButton} from '../../../const';
 import clsx from 'clsx';
 import {AppRoute} from '../../../const';
+import {getAuthorizationStatus} from '../../../store/reducer/user/selectors';
 
 const getClassName = (type, isFavorites) => (
   `${isFavorites ? `${type}__bookmark-button--active` : ''} ${type}__bookmark-button button`
@@ -14,8 +15,9 @@ const getButtonText = (isFavorites) => (
   `${isFavorites ? 'In bookmarks' : 'To bookmarks'}`
 );
 
-function ButtonFavorite({isFavorites, typeButton = typeFavoriteButton.MAIN, authorizationStatus}) {
+function ButtonFavorite({isFavorites, typeButton = typeFavoriteButton.MAIN}) {
   const history = useHistory();
+  const authorizationStatus = useSelector(getAuthorizationStatus);
 
   const handleClick = () => {
     if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
@@ -52,12 +54,6 @@ function ButtonFavorite({isFavorites, typeButton = typeFavoriteButton.MAIN, auth
 ButtonFavorite.propTypes = {
   isFavorites: PropTypes.bool.isRequired,
   typeButton: PropTypes.string,
-  authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-});
-
-// export default ButtonFavorite;
-export default connect(mapStateToProps)(ButtonFavorite);
+export default ButtonFavorite;

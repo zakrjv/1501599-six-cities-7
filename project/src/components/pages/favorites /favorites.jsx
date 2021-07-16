@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Header from '../../elements-page/header/header';
 import {AppRoute} from '../../../const';
 import CardList from '../../elements-page/offers/card-list/card-list';
-import placeCardProp from '../../../props/place-card.prop';
+import {getOffers} from '../../../store/reducer/data/selectors';
 
-function Favorites({offers}) {
+function Favorites() {
+  const offers = useSelector(getOffers);
+
   const [, setActiveOfferId] = useState(0);
 
   const favoriteOffersGroupedByCityName = offers
@@ -59,13 +60,4 @@ function Favorites({offers}) {
   );
 }
 
-Favorites.propTypes = {
-  offers: PropTypes.arrayOf(placeCardProp),
-};
-
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-});
-
-// export default Favorites;
-export default connect(mapStateToProps)(Favorites);
+export default Favorites;
