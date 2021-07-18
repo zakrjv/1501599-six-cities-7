@@ -1,11 +1,12 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {loadOffers, loadReviews, loadUserData, loadNearbyOffers} from '../../action';
+import {loadOffers, loadReviews, loadUserData, loadNearbyOffers, loadFavoriteOffers} from '../../action';
 import {cities} from '../../../mocks/cities';
 
 const initialState = {
   offers: [],
   reviews: [],
   offersNearby: [],
+  offersFavorites: [],
   userData: {},
   cities: cities,
   isDataLoaded: false,
@@ -27,6 +28,10 @@ const data = createReducer(initialState, (builder) => {
     })
     .addCase(loadNearbyOffers, (state, action) => {
       state.offersNearby = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(loadFavoriteOffers, (state, action) => {
+      state.offersFavorites = action.payload;
       state.isDataLoaded = true;
     });
 });
