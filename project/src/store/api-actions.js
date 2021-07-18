@@ -5,7 +5,9 @@ import {
   requireAuthorization,
   redirectToRoute,
   logoutProfile,
-  loadUserData, loadFavoriteOffers
+  loadUserData,
+  loadFavoriteOffers,
+  updateOffer
 } from './action';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {adaptOffersToClient, adaptReviewToClient, adaptUserToClient} from '../adapter';
@@ -62,6 +64,11 @@ const fetchFavoriteOffers = () => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(loadFavoriteOffers(data.slice().map((offer) => adaptOffersToClient(offer)))))
 );
 
+const updateFavoriteStatus = (id, status) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.FAVORITE}/${id}/${status}`)
+    .then(({data}) => dispatch(updateOffer(adaptOffersToClient(data))))
+);
+
 export {
   fetchOffersList,
   checkAuth,
@@ -70,5 +77,6 @@ export {
   fetchReviewsList,
   fetchNearbyOffers,
   postReview,
-  fetchFavoriteOffers
+  fetchFavoriteOffers,
+  updateFavoriteStatus
 };

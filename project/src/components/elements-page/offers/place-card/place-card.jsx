@@ -59,7 +59,10 @@ function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <ButtonFavorite isFavorites={isFavorites}/>
+          <ButtonFavorite
+            offerId={id}
+            isFavorites={isFavorites}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -78,8 +81,8 @@ function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
 
 PlaceCard.propTypes = {
   offer: placeCardProp,
-  onCardMouseEnter: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
+  onCardMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
   currentPage: PropTypes.string.isRequired,
 };
 

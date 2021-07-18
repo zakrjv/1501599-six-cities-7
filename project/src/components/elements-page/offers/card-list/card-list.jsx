@@ -1,26 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
 import clsx from 'clsx';
 import PlaceCard from '../place-card/place-card';
 import placeCardProp from '../../../../props/place-card.prop';
 import {Page, Options} from '../../../../const';
 import {filtersOffersByCity} from '../../../../utils';
-
-const sortOffers = (offersCards, option) => {
-  switch (option) {
-    case Options.POPULAR:
-      return offersCards;
-    case Options.LOW_TO_HIGH:
-      return offersCards.slice().sort((a, b) => a.price - b.price);
-    case Options.HIGH_TO_LOW:
-      return offersCards.slice().sort((a, b) => b.price - a.price);
-    case Options.TOP_RATED_FIRST:
-      return offersCards.slice().sort((a, b) => b.rating - a.rating);
-    default:
-      return offersCards;
-  }
-};
 
 function CardList({offers, currentPage, hoverOnCard, onMouseLeave}) {
   return (
@@ -46,30 +31,30 @@ function CardList({offers, currentPage, hoverOnCard, onMouseLeave}) {
 CardList.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp).isRequired,
   currentPage: PropTypes.string.isRequired,
-  hoverOnCard: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
+  hoverOnCard: PropTypes.func,
+  onMouseLeave: PropTypes.func,
 };
 
-const mapStateToProps = ({DATA, MAIN}, props) => {
-  let offers;
-  switch (props.currentPage) {
-    case Page.MAIN:
-      offers = sortOffers(filtersOffersByCity(DATA.offers, MAIN.currentCity), MAIN.currentOption);
-      break;
-    case Page.OFFER:
-      offers = DATA.offersNearby;
-      break;
-    case Page.FAVORITES:
-      offers = DATA.offers;
-      break;
-    default:
-      break;
-  }
+// const mapStateToProps = ({DATA, MAIN}, props) => {
+//   let offers;
+//   switch (props.currentPage) {
+//     case Page.MAIN:
+//       offers = sortOffers(filtersOffersByCity(DATA.offers, MAIN.currentCity), MAIN.currentOption);
+//       break;
+//     case Page.OFFER:
+//       offers = DATA.offersNearby;
+//       break;
+//     case Page.FAVORITES:
+//       offers = DATA.offers;
+//       break;
+//     default:
+//       break;
+//   }
+//
+//   return {
+//     offers,
+//   };
+// };
 
-  return {
-    offers,
-  };
-};
-
-// export default CardList;
-export default connect(mapStateToProps)(CardList);
+export default CardList;
+// export default connect(mapStateToProps)(CardList);

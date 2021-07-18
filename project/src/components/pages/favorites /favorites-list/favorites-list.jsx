@@ -1,23 +1,36 @@
-import React, {useState} from 'react';
-import {Link} from "react-router-dom";
-import {AppRoute} from "../../../../const";
+import React, {useState, useEffect, useCallback} from 'react';
+import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 import CardList from '../../../elements-page/offers/card-list/card-list';
-import {useSelector} from 'react-redux';
-import {getOffers} from '../../../../store/reducer/data/selectors';
+import {getOffersFavorite} from '../../../../store/reducer/data/selectors';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
+import {AppRoute} from '../../../../const';
+import {fetchFavoriteOffers} from '../../../../store/api-actions';
 
 function FavoritesList() {
-  const offers = useSelector(getOffers);
-
+  const dispatch = useDispatch();
+  const offers = useSelector(getOffersFavorite);
   const [, setActiveOfferId] = useState(0);
+  // console.log(offers);
+  const loadFavoriteOffers = useCallback(
+    () => dispatch(fetchFavoriteOffers()),
+    [dispatch],
+  )
+
+  useEffect(() => {
+    loadFavoriteOffers();
+  }, []);
+
 
   const favoriteOffersGroupedByCityName = offers
-    .filter((offer) => offer.isFavorites === true)
+    // .filter((offer) => offer.isFavorites === true)
     .reduce((allOffers, offer) => {
       const cityName = offer.city.name;
       allOffers[cityName] = [...(allOffers[cityName] || []), offer];
       return allOffers;
     }, {});
+
+  // console.log(favoriteOffersGroupedByCityName);
 
   if (Object.keys(favoriteOffersGroupedByCityName).length === 0) {
     return (
@@ -32,7 +45,9 @@ function FavoritesList() {
           <h1 className="favorites__title">Saved listing</h1>
 
           <ul className="favorites__list">
-            {Object.keys(favoriteOffersGroupedByCityName).map((cityName) => (
+            {Object.keys(favoriteOffersGroupedByCityName).map((cityName) => {
+              console.log(favoriteOffersGroupedByCityName[cityName]);
+              return (
               <li className="favorites__locations-items" key={cityName}>
                 <div className="favorites__locations locations locations--current">
                   <div className="locations__item">
@@ -41,14 +56,14 @@ function FavoritesList() {
                     </Link>
                   </div>
                 </div>
-
                 <CardList
                   offers={favoriteOffersGroupedByCityName[cityName]}
                   currentPage='favorites'
                   hoverOnCard={(offerId) => setActiveOfferId(offerId)}
+                  onMouseLeave={() => setActiveOfferId(0)}
                 />
               </li>
-            ))}
+            )})}
           </ul>
         </section>
       </div>

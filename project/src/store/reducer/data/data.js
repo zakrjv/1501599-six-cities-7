@@ -1,12 +1,23 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {loadOffers, loadReviews, loadUserData, loadNearbyOffers, loadFavoriteOffers} from '../../action';
+import {
+  loadOffers,
+  loadReviews,
+  loadUserData,
+  loadNearbyOffers,
+  loadFavoriteOffers,
+  updateOffer
+} from '../../action';
 import {cities} from '../../../mocks/cities';
+
+const replaceOffer = (prevOffers, newOffer) => (
+  prevOffers.map((prevOffer) => prevOffer.id === newOffer.id ? newOffer : prevOffer)
+);
 
 const initialState = {
   offers: [],
   reviews: [],
   offersNearby: [],
-  offersFavorites: [],
+  offersFavorite: [],
   userData: {},
   cities: cities,
   isDataLoaded: false,
@@ -31,8 +42,11 @@ const data = createReducer(initialState, (builder) => {
       state.isDataLoaded = true;
     })
     .addCase(loadFavoriteOffers, (state, action) => {
-      state.offersFavorites = action.payload;
+      state.offersFavorite = action.payload;
       state.isDataLoaded = true;
+    })
+    .addCase(updateOffer, (state, action) => {
+      state.offers = replaceOffer(state.offers, action.payload);
     });
 });
 
