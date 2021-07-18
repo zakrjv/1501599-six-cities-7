@@ -57,7 +57,6 @@ const logout = () => (dispatch, _getState, api) => (
     .then(() => dispatch(logoutProfile()))
     .then(() => dispatch(loadUserData({})))
     .then(() => dispatch(redirectToRoute(AppRoute.ROOT)))
-    .then(() => dispatch(loadFavoriteOffers([])))
 );
 
 const fetchFavoriteOffers = () => (dispatch, _getState, api) => (

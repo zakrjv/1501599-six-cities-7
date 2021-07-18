@@ -19,6 +19,7 @@ const initialState = {
   userData: {},
   cities: cities,
   isDataLoaded: false,
+  isOffersFavoriteLoaded: false,
 };
 
 const data = createReducer(initialState, (builder) => {
@@ -41,7 +42,7 @@ const data = createReducer(initialState, (builder) => {
     })
     .addCase(loadFavoriteOffers, (state, action) => {
       state.offersFavorite = action.payload;
-      state.isDataLoaded = true;
+      state.isOffersFavoriteLoaded = true;
     })
     .addCase(updateOffer, (state, action) => {
       state.offers = replaceOffer(state.offers, action.payload);
