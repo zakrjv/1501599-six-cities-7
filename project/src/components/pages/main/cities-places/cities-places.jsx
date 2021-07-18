@@ -56,6 +56,7 @@ function CitiesPlaces() {
         <div className="cities__right-section">
           <section className="cities__map map">
             <Map
+              offers={offersByCity}
               activeOfferId={activeOfferId}
               currentPage='main'
             />

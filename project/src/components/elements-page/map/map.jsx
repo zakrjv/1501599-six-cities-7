@@ -4,9 +4,10 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../../hooks/useMap';
 import placeCardProp from '../../../props/place-card.prop';
-import {MapMarker, Page} from '../../../const';
-import {connect} from 'react-redux';
-import {filtersOffersByCity} from '../../../utils';
+import {MapMarker} from '../../../const';
+import {cities} from '../../../mocks/cities';
+import {useSelector} from 'react-redux';
+import {getCurrentCity} from '../../../store/reducer/main/selectors';
 
 const defaultCustomIcon = leaflet.icon({
   iconUrl: MapMarker.URL_MARKER_DEFAULT,
@@ -20,9 +21,12 @@ const activeCustomIcon = leaflet.icon({
   iconAnchor: [15, 30],
 });
 
-function Map({offers, activeOfferId, cities, currentPage}) {
+function Map({offers, activeOfferId, currentPage}) {
+  const currentCity = useSelector(getCurrentCity);
+  const pointCity = cities.find((city) => city.title === currentCity);
+
   const mapRef = useRef(null);
-  const map = useMap(mapRef, cities.coordinates, cities.zoom);
+  const map = useMap(mapRef, pointCity.coordinates, pointCity.zoom);
 
   useEffect(() => {
     const markersLayer = new leaflet.LayerGroup();
@@ -58,31 +62,7 @@ function Map({offers, activeOfferId, cities, currentPage}) {
 Map.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp).isRequired,
   activeOfferId: PropTypes.number.isRequired,
-  cities: PropTypes.object.isRequired,
   currentPage: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({DATA, MAIN}, props) => {
-  let offers;
-  switch (props.currentPage) {
-    case Page.MAIN:
-      offers = filtersOffersByCity(DATA.offers, MAIN.currentCity);
-      break;
-    case Page.OFFER:
-      offers = DATA.offersNearby;
-      break;
-    case Page.FAVORITES:
-      offers = DATA.offers;
-      break;
-    default:
-      break;
-  }
-
-  return {
-    offers,
-    cities: DATA.cities.find((city) => city.title === MAIN.currentCity),
-  };
-};
-
-// export default Map;
-export default connect(mapStateToProps)(Map);
+export default Map;
