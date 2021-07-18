@@ -30,7 +30,7 @@ function CitiesPlaces() {
   const offers = useSelector(getOffers);
 
   const offersByCity = filtersOffersByCity(offers, currentCity);
-  // const sortOffers = sortOffers(offersByCity, currentOption);
+  const offersSort = sortOffers(offersByCity, currentOption);
   const [activeOfferId, setActiveOfferId] = useState(0);
 
   if (offersByCity.length === 0) {
@@ -47,7 +47,7 @@ function CitiesPlaces() {
           <b className="places__found">{offersByCity.length} places to stay in {currentCity}</b>
           <SortingForm/>
           <CardList
-            offers={offersByCity}
+            offers={offersSort}
             currentPage='main'
             hoverOnCard={(offerId) => setActiveOfferId(offerId)}
             onMouseLeave={() => setActiveOfferId(0)}

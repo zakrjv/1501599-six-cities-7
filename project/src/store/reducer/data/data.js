@@ -8,10 +8,8 @@ import {
   updateOffer
 } from '../../action';
 import {cities} from '../../../mocks/cities';
+import {replaceOffer} from '../../../utils';
 
-const replaceOffer = (prevOffers, newOffer) => (
-  prevOffers.map((prevOffer) => prevOffer.id === newOffer.id ? newOffer : prevOffer)
-);
 
 const initialState = {
   offers: [],
@@ -47,6 +45,8 @@ const data = createReducer(initialState, (builder) => {
     })
     .addCase(updateOffer, (state, action) => {
       state.offers = replaceOffer(state.offers, action.payload);
+      state.offersNearby = replaceOffer(state.offersNearby, action.payload);
+      state.offersFavorite = replaceOffer(state.offersFavorite, action.payload);
     });
 });
 

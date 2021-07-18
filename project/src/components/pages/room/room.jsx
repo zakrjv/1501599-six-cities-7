@@ -76,6 +76,7 @@ function Room({offer}) {
                   {title}
                 </h1>
                 <ButtonFavorite
+                  offerId={id}
                   isFavorites={isFavorites}
                   typeButton={typeFavoriteButton.ROOM}
                 />

@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import {connect} from 'react-redux';
 import clsx from 'clsx';
 import PlaceCard from '../place-card/place-card';
 import placeCardProp from '../../../../props/place-card.prop';
-import {Page, Options} from '../../../../const';
-import {filtersOffersByCity} from '../../../../utils';
+import {Page} from '../../../../const';
 
 function CardList({offers, currentPage, hoverOnCard, onMouseLeave}) {
   return (
@@ -35,26 +33,5 @@ CardList.propTypes = {
   onMouseLeave: PropTypes.func,
 };
 
-// const mapStateToProps = ({DATA, MAIN}, props) => {
-//   let offers;
-//   switch (props.currentPage) {
-//     case Page.MAIN:
-//       offers = sortOffers(filtersOffersByCity(DATA.offers, MAIN.currentCity), MAIN.currentOption);
-//       break;
-//     case Page.OFFER:
-//       offers = DATA.offersNearby;
-//       break;
-//     case Page.FAVORITES:
-//       offers = DATA.offers;
-//       break;
-//     default:
-//       break;
-//   }
-//
-//   return {
-//     offers,
-//   };
-// };
 
 export default CardList;
-// export default connect(mapStateToProps)(CardList);
