@@ -2,7 +2,10 @@ import React, {useEffect, useCallback} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import CardList from '../../../elements-page/offers/card-list/card-list';
-import {getOffersFavorite, getOffersFavoriteData} from '../../../../store/reducer/data/selectors';
+import {
+  getFavoriteOffersGroupedByCityName,
+  getOffersFavoriteData
+} from '../../../../store/reducer/data/selectors';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 import {AppRoute} from '../../../../const';
 import {fetchFavoriteOffers} from '../../../../store/api-actions';
@@ -13,16 +16,8 @@ import {getAuthorizationStatus} from '../../../../store/reducer/user/selectors';
 function FavoritesList() {
   const dispatch = useDispatch();
   const authorizationStatus = useSelector(getAuthorizationStatus);
-  const offers = useSelector(getOffersFavorite);
   const isOffersFavoriteLoaded = useSelector(getOffersFavoriteData);
-
-  const favoriteOffersGroupedByCityName = offers
-    .filter((offer) => offer.isFavorites === true)
-    .reduce((allOffers, offer) => {
-      const cityName = offer.city.name;
-      allOffers[cityName] = [...(allOffers[cityName] || []), offer];
-      return allOffers;
-    }, {});
+  const favoriteOffersGroupedByCityName = useSelector(getFavoriteOffersGroupedByCityName);
 
   const loadFavoriteOffers = useCallback(
     () => dispatch(fetchFavoriteOffers()),
