@@ -49,7 +49,7 @@ function CitiesPlaces() {
           <CardList
             offers={offersSort}
             currentPage='main'
-            hoverOnCard={(offerId) => setActiveOfferId(offerId)}
+            onMouseEnter={(offerId) => setActiveOfferId(offerId)}
             onMouseLeave={() => setActiveOfferId(0)}
           />
         </section>

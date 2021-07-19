@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import CardList from '../../../elements-page/offers/card-list/card-list';
@@ -23,8 +23,6 @@ function FavoritesList() {
       allOffers[cityName] = [...(allOffers[cityName] || []), offer];
       return allOffers;
     }, {});
-
-  const [, setActiveOfferId] = useState(0);
 
   const loadFavoriteOffers = useCallback(
     () => dispatch(fetchFavoriteOffers()),
@@ -67,8 +65,6 @@ function FavoritesList() {
                 <CardList
                   offers={favoriteOffersGroupedByCityName[cityName]}
                   currentPage='favorites'
-                  hoverOnCard={(offerId) => setActiveOfferId(offerId)}
-                  onMouseLeave={() => setActiveOfferId(0)}
                 />
               </li>
             ))}

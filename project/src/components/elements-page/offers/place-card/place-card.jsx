@@ -6,7 +6,7 @@ import placeCardProp from '../../../../props/place-card.prop';
 import {selectedRating, Page, AppRoute} from '../../../../const';
 import ButtonFavorite from '../../button-favorite/button-favorite';
 
-function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
+function PlaceCard({offer, onMouseEnter, onMouseLeave, currentPage}) {
   const {
     id,
     previewImage,
@@ -25,7 +25,7 @@ function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
         'near-places__card': currentPage === Page.OFFER,
         'cities__place-card': currentPage === Page.MAIN,
       })}
-      onMouseEnter={onCardMouseEnter}
+      onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
@@ -81,7 +81,7 @@ function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
 
 PlaceCard.propTypes = {
   offer: placeCardProp,
-  onCardMouseEnter: PropTypes.func,
+  onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   currentPage: PropTypes.string.isRequired,
 };

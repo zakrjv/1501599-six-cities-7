@@ -154,7 +154,7 @@ function Room({offer}) {
               <CardList
                 offers={offersNearby}
                 currentPage='offer'
-                hoverOnCard={(offerId) => setActiveOfferId(offerId)}
+                onMouseEnter={(offerId) => setActiveOfferId(offerId)}
                 onMouseLeave={() => setActiveOfferId(0)}
               />
             </div>

@@ -5,7 +5,7 @@ import PlaceCard from '../place-card/place-card';
 import placeCardProp from '../../../../props/place-card.prop';
 import {Page} from '../../../../const';
 
-function CardList({offers, currentPage, hoverOnCard, onMouseLeave}) {
+function CardList({offers, currentPage, onMouseEnter, onMouseLeave}) {
   return (
     <div className={clsx({
       'favorites__places': currentPage === Page.FAVORITES,
@@ -15,10 +15,10 @@ function CardList({offers, currentPage, hoverOnCard, onMouseLeave}) {
     >
       {offers.map((offer) => (
         <PlaceCard
-          offer={offer}
           key={offer.id}
-          onCardMouseEnter={() => hoverOnCard(offer.id)}
+          offer={offer}
           currentPage={currentPage}
+          onMouseEnter={onMouseEnter ? () => onMouseEnter(offer.id) : undefined}
           onMouseLeave={onMouseLeave}
         />
       ))}
@@ -29,7 +29,7 @@ function CardList({offers, currentPage, hoverOnCard, onMouseLeave}) {
 CardList.propTypes = {
   offers: PropTypes.arrayOf(placeCardProp).isRequired,
   currentPage: PropTypes.string.isRequired,
-  hoverOnCard: PropTypes.func,
+  onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
 };
 
