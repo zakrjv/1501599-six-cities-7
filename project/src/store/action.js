@@ -8,6 +8,8 @@ const ActionType = {
   LOAD_REVIEWS: 'data/loadReviews',
   LOAD_USER_DATA: 'data/loadUserData',
   LOAD_NEARBY_OFFERS: 'data/loadNearbyOffers',
+  LOAD_FAVORITE_OFFERS: 'data/loadFavoritesOffers',
+  UPDATE_OFFER: 'data/updateOffer',
   REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
   LOGOUT: 'user/logout',
 };
@@ -47,6 +49,14 @@ const loadNearbyOffers = createAction(ActionType.LOAD_NEARBY_OFFERS, (offers) =>
   payload: offers,
 }));
 
+const loadFavoriteOffers = createAction(ActionType.LOAD_FAVORITE_OFFERS, (offer) => ({
+  payload: offer,
+}));
+
+const updateOffer = createAction(ActionType.UPDATE_OFFER, (offer) => ({
+  payload: offer,
+}));
+
 export {
   ActionType,
   changeCity,
@@ -57,5 +67,7 @@ export {
   logoutProfile,
   redirectToRoute,
   loadUserData,
-  loadNearbyOffers
+  loadNearbyOffers,
+  loadFavoriteOffers,
+  updateOffer
 };

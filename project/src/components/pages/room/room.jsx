@@ -76,6 +76,7 @@ function Room({offer}) {
                   {title}
                 </h1>
                 <ButtonFavorite
+                  offerId={id}
                   isFavorites={isFavorites}
                   typeButton={typeFavoriteButton.ROOM}
                 />
@@ -153,7 +154,7 @@ function Room({offer}) {
               <CardList
                 offers={offersNearby}
                 currentPage='offer'
-                hoverOnCard={(offerId) => setActiveOfferId(offerId)}
+                onMouseEnter={(offerId) => setActiveOfferId(offerId)}
                 onMouseLeave={() => setActiveOfferId(0)}
               />
             </div>

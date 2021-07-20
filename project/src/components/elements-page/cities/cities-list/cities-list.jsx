@@ -13,18 +13,20 @@ function CitiesList() {
   };
 
   return (
-    <section className="locations container">
-      <ul className="locations__list tabs__list">
-        {CITIES.map((city) => (
-          <City
-            key={city}
-            city={city}
-            isActive={currentCity === city}
-            onClick={() => onChangeCity(city)}
-          />
-        ))}
-      </ul>
-    </section>
+    <div className="tabs">
+      <section className="locations container">
+        <ul className="locations__list tabs__list">
+          {CITIES.map((city) => (
+            <City
+              key={city}
+              city={city}
+              isActive={currentCity === city}
+              onClick={() => onChangeCity(city)}
+            />
+          ))}
+        </ul>
+      </section>
+    </div>
   );
 }
 

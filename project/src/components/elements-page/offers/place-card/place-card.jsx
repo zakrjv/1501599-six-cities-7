@@ -6,7 +6,7 @@ import placeCardProp from '../../../../props/place-card.prop';
 import {selectedRating, Page, AppRoute} from '../../../../const';
 import ButtonFavorite from '../../button-favorite/button-favorite';
 
-function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
+function PlaceCard({offer, onMouseEnter, onMouseLeave, currentPage}) {
   const {
     id,
     previewImage,
@@ -25,7 +25,7 @@ function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
         'near-places__card': currentPage === Page.OFFER,
         'cities__place-card': currentPage === Page.MAIN,
       })}
-      onMouseEnter={onCardMouseEnter}
+      onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
@@ -59,7 +59,10 @@ function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <ButtonFavorite isFavorites={isFavorites}/>
+          <ButtonFavorite
+            offerId={id}
+            isFavorites={isFavorites}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -78,8 +81,8 @@ function PlaceCard({offer, onCardMouseEnter, onMouseLeave, currentPage}) {
 
 PlaceCard.propTypes = {
   offer: placeCardProp,
-  onCardMouseEnter: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
   currentPage: PropTypes.string.isRequired,
 };
 

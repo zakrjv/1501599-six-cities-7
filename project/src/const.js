@@ -25,6 +25,7 @@ const APIRoute = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   NEARBY_OFFERS: '/nearby',
+  FAVORITE: '/favorite',
 };
 
 const Page = {
