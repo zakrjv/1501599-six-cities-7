@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// почему-то в разметке flex-direction: row-reverse;
-// пришлось делать массив в обратном порядке
 const RATING_STARS = [5, 4, 3, 2, 1];
 
 const textRating = {
@@ -12,9 +10,6 @@ const textRating = {
   4: 'good',
   5: 'perfect',
 };
-
-// Не изменяется checked при выборе рейтинга, но если
-// первоначально стейт задать, допустим, 3 вместо 0, то применяется именно к заданному.
 
 function RatingStars({onChange, rating}) {
   return (
