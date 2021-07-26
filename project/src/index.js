@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Router as BrowserRouter} from 'react-router-dom';
 import {configureStore} from '@reduxjs/toolkit';
 import {createApi} from './services/api';
 import {Provider} from 'react-redux';
@@ -9,6 +10,7 @@ import {requireAuthorization} from './store/action';
 import {checkAuth, fetchOffersList} from './store/api-actions';
 import {AuthorizationStatus} from './const';
 import {redirect} from './store/middlewares/redirect';
+import browserHistory from './browser-history';
 
 const store = configureStore({
   reducer: rootReducer,
@@ -28,7 +30,9 @@ store.dispatch(fetchOffersList());
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App/>
+      <BrowserRouter history={browserHistory}>
+        <App/>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));
