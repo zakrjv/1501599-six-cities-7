@@ -34,7 +34,7 @@ export const offers = [
   type: 'Apartment',
 },
   {
-    id: 1,
+    id: 2,
     bedrooms: 3,
     city: {
       location: {
@@ -54,7 +54,7 @@ export const offers = [
     },
     images: ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
     isPremium: true,
-    isFavorites: true,
+    isFavorites: false,
     location: {
       latitude: 52.3909553943508,
       longitude: 4.85309666406198,
