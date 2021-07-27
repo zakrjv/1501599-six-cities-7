@@ -6,7 +6,7 @@ import placeCardProp from '../../../../props/place-card.prop';
 import {selectedRating, Page, AppRoute} from '../../../../const';
 import ButtonFavorite from '../../button-favorite/button-favorite';
 
-function PlaceCard({offer, onMouseEnter, onMouseLeave, currentPage}) {
+function PlaceCard({offer, onMouseEnter, onMouseLeave, currentPage = Page.MAIN}) {
   const {
     id,
     previewImage,
