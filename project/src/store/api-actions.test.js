@@ -4,11 +4,13 @@ import {createApi} from '../services/api';
 import {ActionType} from './action';
 import {
   adaptOffersToClient,
-  adaptReviewToClient,
+  adaptReviewToClient, adaptUserToClient,
 } from '../adapter';
 import {
   fetchOffersList,
   checkAuth,
+  login,
+  logout,
   fetchReviewsList,
   fetchNearbyOffers,
   postReview,
@@ -61,6 +63,14 @@ const review = {
     isPro: false,
     name: 'Max',
   },
+};
+const testUserData = {
+  avatarUrl: 'test.png',
+  email: 'test@test.com',
+  id: 1,
+  isPro: false,
+  name: 'test@test.com',
+  token: 'T2xpdmVyLmNvbm5lckBnbWFpbC5jb20=',
 };
 
 let api = null;
@@ -211,4 +221,76 @@ describe('Async operations', () => {
       });
   });
 
+  it('should make a correct API call to DELETE /logout', () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const logoutLoader = logout();
+    const user = {};
+
+    Storage.prototype.removeItem = jest.fn();
+
+    apiMock
+      .onDelete(APIRoute.LOGOUT)
+      .reply(204, [{fake: true}]);
+
+    return logoutLoader(dispatch, jest.fn(() => {
+    }), api)
+      .then(() => {
+        expect(dispatch).toBeCalledTimes(3);
+
+        expect(dispatch).nthCalledWith(1, {
+          type: ActionType.LOGOUT,
+        });
+
+        expect(dispatch).nthCalledWith(2, {
+          type: ActionType.LOAD_USER_DATA,
+          payload: user,
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.REDIRECT_TO_ROUTE,
+          payload: AppRoute.ROOT,
+        });
+
+        expect(Storage.prototype.removeItem).toBeCalledTimes(1);
+        expect(Storage.prototype.removeItem).nthCalledWith(1, 'token');
+      });
+  });
+
+  it('should make correct API call to POST /login', () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const testUser = {email: 'test@test.com', password: '123456'};
+    const loginLoader = login(testUser);
+
+    Storage.prototype.setItem = jest.fn();
+
+    apiMock
+      .onPost(APIRoute.LOGIN)
+      .reply(200, testUserData);
+
+    return loginLoader(dispatch, () => {
+    }, api)
+      .then(() => {
+        expect(Storage.prototype.setItem).toBeCalledTimes(1);
+        expect(Storage.prototype.setItem).nthCalledWith(1, 'token', testUserData.token);
+
+        expect(dispatch).toHaveBeenCalledTimes(3);
+
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_USER_DATA,
+          payload: adaptUserToClient(testUserData),
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.REQUIRED_AUTHORIZATION,
+          payload: AuthorizationStatus.AUTH,
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.REDIRECT_TO_ROUTE,
+          payload: AppRoute.ROOT,
+        });
+      })
+  });
 });
