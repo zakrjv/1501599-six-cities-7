@@ -54,6 +54,7 @@ function Map({offers, activeOfferId, currentPage}) {
     <div
       style={{height: '100%'}}
       ref={mapRef}
+      data-testid='map'
     >
     </div>
   );
