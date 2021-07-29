@@ -17,6 +17,7 @@ describe('Component: Map', () => {
       MAIN: {
         currentCity: CITIES[1],
       },
+      DATA: {offers: offers}
     });
     render(
       <Provider store={store}>

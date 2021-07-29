@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Header from '../../elements-page/header/header';
 import {AuthorizationStatus, selectedRating, typeFavoriteButton} from '../../../const';
@@ -46,8 +46,6 @@ function Room({offer}) {
     () => dispatch(fetchNearbyOffers(id)),
     [dispatch, id],
   );
-
-  const [activeOfferId, setActiveOfferId] = useState(0);
 
   useEffect(() => {
     loadReviews();
@@ -142,8 +140,8 @@ function Room({offer}) {
           <section className="property__map map">
             <Map
               offers={offersNearby}
-              activeOfferId={activeOfferId}
               currentPage='offer'
+              activeOfferId={offer.id}
             />
           </section>
         </section>
@@ -154,8 +152,6 @@ function Room({offer}) {
               <CardList
                 offers={offersNearby}
                 currentPage='offer'
-                onMouseEnter={(offerId) => setActiveOfferId(offerId)}
-                onMouseLeave={() => setActiveOfferId(0)}
               />
             </div>
           </section>

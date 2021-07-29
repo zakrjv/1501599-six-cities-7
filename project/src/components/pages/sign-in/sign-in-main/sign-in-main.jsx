@@ -13,6 +13,12 @@ function SignInMain() {
     dispatch(login(authData));
   };
 
+  const handlePasswordInput = (evt) => {
+    evt.target.value.trim().length < 1
+      ? evt.target.setCustomValidity('Password cannot contain only spaces')
+      : evt.target.setCustomValidity('');
+  };
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onSubmit({
@@ -58,6 +64,7 @@ function SignInMain() {
                 name="password"
                 placeholder="Password"
                 required=""
+                onInput={handlePasswordInput}
                 data-testid="password"
               />
             </div>
