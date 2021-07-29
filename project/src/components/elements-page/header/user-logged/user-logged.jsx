@@ -13,7 +13,11 @@ function UserLogged() {
   return (
     <ul className="header__nav-list">
       <li className="header__nav-item user">
-        <Link to={AppRoute.FAVORITES} className="header__nav-link header__nav-link--profile">
+        <Link
+          to={AppRoute.FAVORITES}
+          className="header__nav-link header__nav-link--profile"
+          data-testid="email-link"
+        >
           <div className="header__avatar-wrapper user__avatar-wrapper">
             <img src={userData.avatarUrl} alt="user"/>
           </div>

@@ -31,6 +31,7 @@ function SortingForm() {
         className="places__sorting-type"
         tabIndex="0"
         onClick={() => setIsOpened(!isOpened)}
+        data-testid="sorting"
       >
         {currentOption}
         <svg className="places__sorting-arrow" width="7" height="4">

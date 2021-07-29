@@ -13,7 +13,7 @@ const textRating = {
 
 function RatingStars({onChange, rating}) {
   return (
-    <div className="reviews__rating-form form__rating">
+    <div className="reviews__rating-form form__rating" data-testid="stars-form">
       {RATING_STARS.map((star) => (
         <React.Fragment key={star}>
           <input
