@@ -8,6 +8,7 @@ import {MapMarker} from '../../../const';
 import {cities} from '../../../mocks/cities';
 import {useSelector} from 'react-redux';
 import {getCurrentCity} from '../../../store/reducer/main/selectors';
+import {getOffers} from "../../../store/reducer/data/selectors";
 
 const defaultCustomIcon = leaflet.icon({
   iconUrl: MapMarker.URL_MARKER_DEFAULT,
@@ -22,9 +23,9 @@ const activeCustomIcon = leaflet.icon({
 });
 
 function Map({offers, activeOfferId, currentPage}) {
+  const ads = useSelector(getOffers);
   const currentCity = useSelector(getCurrentCity);
   const pointCity = cities.find((city) => city.title === currentCity);
-
   const mapRef = useRef(null);
   const map = useMap(mapRef, pointCity.coordinates, pointCity.zoom);
 
@@ -42,6 +43,17 @@ function Map({offers, activeOfferId, currentPage}) {
           });
         markersLayer.addLayer(marker);
       });
+
+      ads.filter((ad) => ad.id === activeOfferId).forEach(({location}) => {
+        const mainMarker = leaflet
+          .marker({
+            lat: location.latitude,
+            lng: location.longitude,
+          }, {
+            icon: activeCustomIcon,
+          });
+        markersLayer.addLayer(mainMarker);
+      })
 
       markersLayer.addTo(map);
     }
