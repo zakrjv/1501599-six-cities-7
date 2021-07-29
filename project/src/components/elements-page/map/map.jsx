@@ -8,7 +8,7 @@ import {MapMarker} from '../../../const';
 import {cities} from '../../../mocks/cities';
 import {useSelector} from 'react-redux';
 import {getCurrentCity} from '../../../store/reducer/main/selectors';
-import {getOffers} from "../../../store/reducer/data/selectors";
+import {getOffers} from '../../../store/reducer/data/selectors';
 
 const defaultCustomIcon = leaflet.icon({
   iconUrl: MapMarker.URL_MARKER_DEFAULT,
@@ -53,7 +53,7 @@ function Map({offers, activeOfferId, currentPage}) {
             icon: activeCustomIcon,
           });
         markersLayer.addLayer(mainMarker);
-      })
+      });
 
       markersLayer.addTo(map);
     }
