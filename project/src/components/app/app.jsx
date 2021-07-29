@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {Route, Switch} from 'react-router-dom';
 import Main from '../pages/main/main';
-import Favorites from '../pages/favorites /favorites';
+import Favorites from '../pages/favorites/favorites';
 import NotFound from '../pages/not-found/not-found';
 import Room from '../pages/room/room';
 import SignIn from '../pages/sign-in/sign-in';
